@@ -1,0 +1,62 @@
+<!--
+  ~ Copyright (c) 2015. Annie Hui @ RStar Technology Solutions
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.rstar.mobile.csc205sp2015.course.ModuleListActivity" >
+
+    <item
+        android:id="@+id/menu_moduleList_search"
+        android:showAsAction="ifRoom"
+        android:title="@string/menu_modulelist_search"
+        android:icon="@drawable/ic_action_search"
+        />
+
+    <item
+        android:id="@+id/menu_moduleList_login"
+        android:showAsAction="ifRoom"
+        android:title="@string/menu_modulelist_login"
+        android:icon="@drawable/ic_action_accounts"
+        />
+
+    <item
+        android:id="@+id/menu_moduleList_reload"
+        android:showAsAction="ifRoom"
+        android:title="@string/menu_modulelist_reload"
+        android:icon="@drawable/ic_action_refresh"
+        />
+
+    <item
+        android:id="@+id/menu_moduleList_tools"
+        android:showAsAction="ifRoom"
+        android:title="@string/menu_modulelist_tools"
+        android:icon="@drawable/ic_hammar"
+        />
+
+    <item
+        android:id="@+id/menu_moduleList_help"
+        android:showAsAction="ifRoom"
+        android:title="@string/menu_modulelist_help"
+        android:icon="@drawable/ic_action_about"
+        />
+
+    <item
+        android:id="@+id/menu_moduleList_copyright"
+        android:showAsAction="never"
+        android:title="@string/menu_modulelist_copyright"
+        />
+
+</menu>

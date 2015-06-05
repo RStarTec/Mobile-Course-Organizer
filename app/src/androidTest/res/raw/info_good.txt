@@ -1,0 +1,4 @@
+2015-01-15
+1	History and the von Neumann Model	module1/	module1.zip	attredirects=0&d=1	9	9	9	1	0	2	Sat Jan 17 11:38:27 EST 2015
+2	Divide and Conquer	module2/	module2.zip	attredirects=0&d=1	17	17	17	0	0	0	Sat Jan 17 11:38:27 EST 2015
+3	Amdahl's law overview	module3/	module3.zip	attredirects=0&d=1	7	0	0	0	1	0	Sat Jan 17 11:38:27 EST 2015

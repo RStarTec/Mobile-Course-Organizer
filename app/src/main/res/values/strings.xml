@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2015. Annie Hui @ RStar Technology Solutions
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+
+    <string name="app_name">CSC205</string>
+    <string name="cover_title">Computer\nOrganization\n\nCSC 205\nMobile</string>
+
+    <string name="menu_audio_play">Play</string>
+    <string name="menu_audio_pause">Pause</string>
+    <string name="menu_audio_loading">Loading</string>
+
+    <string name="menu_module_zoomtext">Zoom text</string>
+    <string name="menu_module_homework">Homework</string>
+    <string name="menu_module_search">Search</string>
+    <string name="menu_module_tools">Tools</string>
+    <string name="menu_module_help">Help</string>
+
+    <string name="menu_modulelist_login">Login</string>
+    <string name="menu_modulelist_search">Search</string>
+    <string name="menu_modulelist_settings">Settings</string>
+    <string name="menu_modulelist_reload">Reload</string>
+    <string name="menu_modulelist_tools">Tools</string>
+    <string name="menu_modulelist_help">Help</string>
+    <string name="menu_modulelist_copyright">Copyright</string>
+
+    <string name="menu_homework_edit">Edit</string>
+    <string name="menu_homework_submit">Submit</string>
+    <string name="menu_homework_score">Score</string>
+
+    <string name="menu_login_new">new account</string>
+    <string name="menu_login_existing">existing account</string>
+    <string name="menu_login_passwd">Change pasword</string>
+    <string name="menu_login_reset">Reset password</string>
+
+    <string name="menu_tools_numToRep">Convert to representation</string>
+    <string name="menu_tools_repToNum">Convert to value</string>
+    <string name="menu_tools_arithInt">Integer arithmetic</string>
+    <string name="menu_tools_arithFloat">Float arithmetic</string>
+    <string name="menu_tools_pipelineIdeal">Ideal pipeline</string>
+    <string name="menu_tools_pipelineOverhead">Pipeline with overhead</string>
+    <string name="menu_tools_mem2L">Two-level memories</string>
+
+    <string name="menu_developerOptions">Developer options</string>
+    <string name="menu_developer_clearSQLite">Clear sqlite</string>
+    <string name="menu_developer_clearLog">Clear log</string>
+    <string name="menu_developer_clearInternal">Clear internal files</string>
+    <string name="menu_developer_clearPreferences">Clear preferences</string>
+    <string name="menu_developer_clearStatics">Clear statics</string>
+    <string name="menu_developer_moreOptions">More options</string>
+    <string name="menu_developer_post">Post</string>
+    <string name="menu_developer_masterPost">Master Post</string>
+    <string name="menu_developer_login">Master login</string>
+    <string name="menu_developer_export">Export</string>
+    <string name="menu_developer_tools">Tools</string>
+
+    <string name="menu_testerOptions">Tester options</string>
+    <string name="menu_tester_reportbug">Report bug</string>
+    <string name="menu_tester_clear">Clear all</string>
+
+    <string name="menu_post_reset">Reset</string>
+    <string name="menu_post_passwd">Password</string>
+    <string name="menu_post_signup">Sign up</string>
+    <string name="menu_post_signin">Sign in</string>
+    <string name="menu_post_upload">Upload</string>
+    <string name="menu_post_download">Download</string>
+    <string name="menu_post_score">Score</string>
+    <string name="menu_post_feedback">Feedback</string>
+    <string name="menu_post_submitted">Get submitted</string>
+    <string name="menu_post_export">Export</string>
+
+    <string name="menu_search_keyword">Search</string>
+    <string name="menu_search_option">Options</string>
+
+
+    <string name="search_noMatch">No matches found</string>
+    <string name="title_activity_drawer">DrawerActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Drawers -->
+    <string name="drawer_open">Drawer open</string>
+    <string name="drawer_close">Drawer closed</string>
+
+
+    <string name="developer_options">App behaviorial Options</string>
+    <string name="developer_warning">This app will close when you press OK. Please restart app afterwards for changes to take place.</string>
+
+
+    <string name="homework_login">Homework access requires login</string>
+    <string name="homework_download">Download homework if available</string>
+    <string name="homework_unavail">Homework not available</string>
+
+    <string name="homework_answer">My answer:</string>
+    <string name="homework_noanswer">(blank)</string>
+    <string name="homework_label">Homework</string>
+    <string name="homework_score_label">Score:</string>
+    <string name="homework_feedback_label">Feedback:</string>
+    <string name="homework_submitted_label">Based on submitted work:</string>
+
+    <string name="unlock_title">Server access</string>
+    <string name="unlock_message">Enter passcode to unlock</string>
+
+    <string name="api_userId">NOVA userid</string>
+    <string name="api_email">Email address (for password reset)</string>
+    <string name="api_password">Password</string>
+    <string name="api_newpassword">New password</string>
+    <string name="api_module">Module</string>
+    <string name="api_response">Response</string>
+
+    <string name="quiz_label">Quiz</string>
+    <string name="extras_label">More</string>
+    <string name="video_label">Video</string>
+
+    <string name="quiz_answer">My answer</string>
+    <string name="button_quiz_answer">Check</string>
+    <string name="button_watch_video">Watch</string>
+
+    <string name="button_reload">Reload</string>
+    <string name="button_save">save</string>
+    <string name="button_submit">submit</string>
+    <string name="button_OK">ok</string>
+    <string name="button_cancel">Cancel</string>
+
+    <string name="label_carry">Carry</string>
+    <string name="label_plus">+</string>
+    <string name="label_blank">\ </string>
+
+    <string name="label_mem2L_t1">T1</string>
+    <string name="label_mem2L_t2">T2</string>
+    <string name="label_mem2L_h">h</string>
+    <string name="label_mem2L_parallel">par</string>
+    <string name="label_mem2L_sequential">seq</string>
+    <string name="label_mem2L_logscaled">lg</string>
+    <string name="label_mem2L_linear">lin</string>
+
+</resources>
