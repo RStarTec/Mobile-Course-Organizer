@@ -35,8 +35,8 @@ import com.rstar.mobile.csc205sp2015.io.Savelog;
 
 
 public class Mem2LFragment extends Fragment {
-	private static final String TAG = Mem2LFragment.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
+    private static final String TAG = Mem2LFragment.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
 
     private static final int InputType_H = 200;
     private static final int InputType_T1 = 201;

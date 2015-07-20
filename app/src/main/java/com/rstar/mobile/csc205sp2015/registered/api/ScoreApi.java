@@ -33,8 +33,8 @@ import java.util.List;
 
 
 public class ScoreApi extends Api {
-	private static final String TAG = ScoreApi.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
+    private static final String TAG = ScoreApi.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
 
     // The following fields are used for verifying access permission
     private static final String fieldTag = "tag";
@@ -45,7 +45,7 @@ public class ScoreApi extends Api {
     private static final String fieldSemester = "semester";
     private static final String fieldSiteId = "siteId"; // private code to make sure this app matches with the site
     private static final String fieldModule = "module";
-	private static final int numberOfFields = 8;
+    private static final int numberOfFields = 8;
     private static final String defaultScoreFilename = "Score";
     private static final String defaultFeedbackFilename = "Feedback";
     private static final String defaultSubmittedFilename = "Submitted";
@@ -70,13 +70,13 @@ public class ScoreApi extends Api {
 
 
     // This requires network access. Therefore, it must be run within an asyncTask
-	public ScoreApi(Context context, String userId, String password, String accessCode, int moduleNumber, int request) throws Exception {
+    public ScoreApi(Context context, String userId, String password, String accessCode, int moduleNumber, int request) throws Exception {
         // Intentionally do not associate the user's id and the module number with the data obtained.
         // Do not cache this data on device. User is required to login for every access.
-		super(context, getDefaultFilename(request));
-		Savelog.d(TAG, debug, "constructor called");
+        super(context, getDefaultFilename(request));
+        Savelog.d(TAG, debug, "constructor called");
 
-		// do the final bit of checking to prevent sending bad data to server
+        // do the final bit of checking to prevent sending bad data to server
         if (context==null) throw new Exception("invalid parameters");
         if (!Validity.isValid(userId)) throw new Exception("invalid parameters");
         if (!Validity.isValid(password)) throw new Exception("invalid parameters");
@@ -91,7 +91,7 @@ public class ScoreApi extends Api {
 
         post(context);
         data = IO.loadFileAsString(context, getSavedFile(context)); // saved file contains just the score
-	}
+    }
 
 
     private void getFields(String userId, String password, String accessCode, int moduleNumber, int request) {
@@ -110,10 +110,10 @@ public class ScoreApi extends Api {
         }
     }
 
-	@Override
-	protected List<NameValuePair> setPostData() {
-		Savelog.d(TAG, debug, "Creating nameValuePairs of size " + numberOfFields);
-		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+    @Override
+    protected List<NameValuePair> setPostData() {
+        Savelog.d(TAG, debug, "Creating nameValuePairs of size " + numberOfFields);
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair(fieldCourseId, courseId));
         nameValuePairs.add(new BasicNameValuePair(fieldSemester, semester));
         nameValuePairs.add(new BasicNameValuePair(fieldSiteId, siteId));
@@ -122,8 +122,8 @@ public class ScoreApi extends Api {
         nameValuePairs.add(new BasicNameValuePair(fieldPassword, password));
         nameValuePairs.add(new BasicNameValuePair(fieldAccessCode, accessCode));
         nameValuePairs.add(new BasicNameValuePair(fieldModule, Integer.toString(moduleNumber)));
-		return nameValuePairs;
-	}
+        return nameValuePairs;
+    }
 
     private static String getDefaultFilename(int request) {
         String filename = "";
@@ -137,9 +137,9 @@ public class ScoreApi extends Api {
     }
 
     @Override
-	public String getCommunication() {
+    public String getCommunication() {
         return super.getCommunication() + "\nData:\n" + data;
-	}
+    }
 
 
     public double getScore(Context context) {
@@ -164,9 +164,9 @@ public class ScoreApi extends Api {
         return file;
     }
 
-	@Override
-	protected String getSite(Context context) {
-		return PrivateSite.get(context).getScoreApi();
-	}
+    @Override
+    protected String getSite(Context context) {
+        return PrivateSite.get(context).getScoreApi();
+    }
 
 }

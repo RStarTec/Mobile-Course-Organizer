@@ -37,8 +37,8 @@ import com.rstar.mobile.csc205sp2015.io.Savelog;
 
 
 public class UnlockFragment extends Fragment {
-	private static final String TAG = UnlockFragment.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
+    private static final String TAG = UnlockFragment.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
 
     private String mPasscode = "";
     private EditText mPasscodeView = null;
@@ -47,27 +47,27 @@ public class UnlockFragment extends Fragment {
     private FieldTextWatcher mPasscodeTextWatcher = null;
     private OkButtonClickedListener mButtonClickedListener = null;
 
-	public static UnlockFragment newInstance() {
-		Bundle args = new Bundle();
+    public static UnlockFragment newInstance() {
+        Bundle args = new Bundle();
 
-   		UnlockFragment fragment = new UnlockFragment();
-		fragment.setArguments(args);
-		return fragment;
-	}
-	
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		Savelog.d(TAG, debug, "onCreate()");
+           UnlockFragment fragment = new UnlockFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+    
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Savelog.d(TAG, debug, "onCreate()");
 
         if (!IO.isNetworkAvailable(getActivity())) {
             Toast.makeText(getActivity(), Message.toastNoNetwork, Toast.LENGTH_SHORT).show();
         }
 
-		setRetainInstance(true);
+        setRetainInstance(true);
 
-	} // end to implementing onCreate()
+    } // end to implementing onCreate()
 
 
 

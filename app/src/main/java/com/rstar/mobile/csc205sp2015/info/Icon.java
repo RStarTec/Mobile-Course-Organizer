@@ -26,10 +26,10 @@ import java.util.ArrayList;
 
 
 public class Icon  {
-	private static final String TAG = Icon.class.getSimpleName()+"_class";
-	private static boolean debug = AppSettings.defaultDebug;
-	
-	private static final int iconIds[] = {
+    private static final String TAG = Icon.class.getSimpleName()+"_class";
+    private static boolean debug = AppSettings.defaultDebug;
+    
+    private static final int iconIds[] = {
             R.drawable.ic_action_refresh,
             R.drawable.ic_action_search,
             R.drawable.ic_hammar,
@@ -53,8 +53,8 @@ public class Icon  {
             R.drawable.ic_tools_pipeideal,
             R.drawable.ic_tools_pipeoverhead,
             R.drawable.ic_tools_2l
-	};
-	private static final int nameIds[] = {
+    };
+    private static final int nameIds[] = {
             R.string.menu_modulelist_reload,
             R.string.menu_modulelist_search,
             R.string.menu_modulelist_tools,
@@ -78,8 +78,8 @@ public class Icon  {
             R.string.menu_tools_pipelineIdeal,
             R.string.menu_tools_pipelineOverhead,
             R.string.menu_tools_mem2L
-	};
-	private static final String descriptions[] = {
+    };
+    private static final String descriptions[] = {
             "Check course website for new modules and updates",
             "Keyword search on the text of existing modules",
             "Open toolbox",
@@ -105,53 +105,53 @@ public class Icon  {
             "Evaluate the effective access time (EAT) and the efficiency of a 2-level memory system."
     };
 
-	private int iconId = 0;
-	private int nameId = 0;
-	private String description = "";
-	public Icon(int iconId, int nameId, String description) throws Exception {
-		if (iconId==0 || nameId==0 || description==null) throw new Exception("bad arguments");
-		this.iconId = iconId;
-		this.nameId = nameId;
-		this.description = description;
-	}
-	public int getIconId() {
-		return iconId;
-	}
-	public int getNameId() {
-		return nameId;
-	}
-	public String getDescription() {
-		return description;
-	}
-	
-	public static ArrayList<Icon> makeList() {
-		Savelog.d(TAG, debug, "makeList()");
-		ArrayList<Icon> list = new ArrayList<Icon>();
-		int total = iconIds.length;
-		if (total!=nameIds.length || total!=descriptions.length) return list;
-		for (int index=0; index<total; index++) {
-			try {
-				Icon icon = new Icon(iconIds[index], nameIds[index], descriptions[index]);
-				list.add(icon);
-			}
-			catch (Exception e) {
-				Savelog.w(TAG, "cannot create icon at " + index + "\n" + e.getMessage());
-			}
-		}
-		return list;
-	}
+    private int iconId = 0;
+    private int nameId = 0;
+    private String description = "";
+    public Icon(int iconId, int nameId, String description) throws Exception {
+        if (iconId==0 || nameId==0 || description==null) throw new Exception("bad arguments");
+        this.iconId = iconId;
+        this.nameId = nameId;
+        this.description = description;
+    }
+    public int getIconId() {
+        return iconId;
+    }
+    public int getNameId() {
+        return nameId;
+    }
+    public String getDescription() {
+        return description;
+    }
+    
+    public static ArrayList<Icon> makeList() {
+        Savelog.d(TAG, debug, "makeList()");
+        ArrayList<Icon> list = new ArrayList<Icon>();
+        int total = iconIds.length;
+        if (total!=nameIds.length || total!=descriptions.length) return list;
+        for (int index=0; index<total; index++) {
+            try {
+                Icon icon = new Icon(iconIds[index], nameIds[index], descriptions[index]);
+                list.add(icon);
+            }
+            catch (Exception e) {
+                Savelog.w(TAG, "cannot create icon at " + index + "\n" + e.getMessage());
+            }
+        }
+        return list;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj==null) return false;
-		if (obj instanceof Icon) {
-			Icon icon2 = (Icon) obj;
-			if (this.iconId==icon2.getIconId() 
-				&& this.nameId==icon2.getNameId()
-				&& this.description.equals(icon2.getDescription())) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (obj==null) return false;
+        if (obj instanceof Icon) {
+            Icon icon2 = (Icon) obj;
+            if (this.iconId==icon2.getIconId() 
+                && this.nameId==icon2.getNameId()
+                && this.description.equals(icon2.getDescription())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

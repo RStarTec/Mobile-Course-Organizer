@@ -45,10 +45,10 @@ import java.io.File;
 
 
 public class DeveloperDialogFragment extends DialogFragment {
-	private static final String TAG = DeveloperDialogFragment.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
+    private static final String TAG = DeveloperDialogFragment.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
 
-	private static final String EXTRA_resume = DeveloperDialogFragment.class.getSimpleName()+".resume";
+    private static final String EXTRA_resume = DeveloperDialogFragment.class.getSimpleName()+".resume";
 
     public static final String dialogTag = DeveloperDialogFragment.class.getSimpleName()+"_tag";
 
@@ -60,28 +60,28 @@ public class DeveloperDialogFragment extends DialogFragment {
     private DeveloperOptions mOptions;
 
     // The following are for memory management to avoid leaks
-	private Button mOkButton = null;
-	private OkOnClickListener mOkOnClickListener = null;
+    private Button mOkButton = null;
+    private OkOnClickListener mOkOnClickListener = null;
 
-	private BinaryOptionsAdapter mBinaryOptionsAdapter;
-	
-	private RadioGroup mRadioGroup[] = new RadioGroup[radiogroup_count];
-	private RadioButton mRadioButtons[][] = new RadioButton[radiogroup_count][];
-	private RadioGroupOnCheckedChangeListener mRadioGroupListeners[] = new RadioGroupOnCheckedChangeListener[radiogroup_count];
+    private BinaryOptionsAdapter mBinaryOptionsAdapter;
+    
+    private RadioGroup mRadioGroup[] = new RadioGroup[radiogroup_count];
+    private RadioButton mRadioButtons[][] = new RadioButton[radiogroup_count][];
+    private RadioGroupOnCheckedChangeListener mRadioGroupListeners[] = new RadioGroupOnCheckedChangeListener[radiogroup_count];
     private SeekBar mSeekbars[] = new SeekBar[seekbar_count];
 
-	public static DeveloperDialogFragment newInstance() {
-		Bundle args = new Bundle();
-		DeveloperDialogFragment fragment = new DeveloperDialogFragment();
+    public static DeveloperDialogFragment newInstance() {
+        Bundle args = new Bundle();
+        DeveloperDialogFragment fragment = new DeveloperDialogFragment();
         args.putBoolean(EXTRA_resume, false);
-		fragment.setArguments(args);
-		return fragment;
-	}
-	
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+        fragment.setArguments(args);
+        return fragment;
+    }
+    
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         boolean resume = false;
         resume = getArguments().getBoolean(EXTRA_resume, false);
@@ -92,16 +92,16 @@ public class DeveloperDialogFragment extends DialogFragment {
             mOptions = new DeveloperOptions(getActivity(), tmpFilename);
         else
             mOptions = new DeveloperOptions(getActivity());
-	}
+    }
 
-	
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		
-		View v = getActivity().getLayoutInflater().inflate(R.layout.dialog_developer, null);
-		
-		ListView listView = (ListView) v.findViewById(R.id.dialogDeveloper_list_id);
-		mBinaryOptionsAdapter = new BinaryOptionsAdapter(this);
-		listView.setAdapter(mBinaryOptionsAdapter);
+    
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        
+        View v = getActivity().getLayoutInflater().inflate(R.layout.dialog_developer, null);
+        
+        ListView listView = (ListView) v.findViewById(R.id.dialogDeveloper_list_id);
+        mBinaryOptionsAdapter = new BinaryOptionsAdapter(this);
+        listView.setAdapter(mBinaryOptionsAdapter);
 
         {   // Currently only one radio group.
             String labels[][] = DeveloperOptions.getMultipleChoiceOptionLabels();
@@ -157,56 +157,56 @@ public class DeveloperDialogFragment extends DialogFragment {
             }
 
         }
-		mOkOnClickListener = new OkOnClickListener(this);
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setView(v)
-			.setPositiveButton(R.string.button_OK, mOkOnClickListener)
-			.setNegativeButton(R.string.button_cancel, null);
+        mOkOnClickListener = new OkOnClickListener(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(v)
+            .setPositiveButton(R.string.button_OK, mOkOnClickListener)
+            .setNegativeButton(R.string.button_cancel, null);
 
-		
-		Dialog dialog = builder.create();
-		return dialog;
-		
-	} // end to onCreateDialog()
-	
-	
-	@Override
-	public void onStart() {
-		super.onStart();
-		AlertDialog d = (AlertDialog) getDialog();
-		if (d!=null) {
-			mOkButton = (Button) d.getButton(Dialog.BUTTON_POSITIVE);
-		}
-	}
+        
+        Dialog dialog = builder.create();
+        return dialog;
+        
+    } // end to onCreateDialog()
+    
+    
+    @Override
+    public void onStart() {
+        super.onStart();
+        AlertDialog d = (AlertDialog) getDialog();
+        if (d!=null) {
+            mOkButton = (Button) d.getButton(Dialog.BUTTON_POSITIVE);
+        }
+    }
 
-	@Override
-	public void onDestroyView() {
-		super.onDestroyView();
-		if (mOkButton!=null) {
-			mOkButton.setOnClickListener(null);
-			mOkButton = null;
-		}
-		if (mOkOnClickListener!=null) {
-			mOkOnClickListener.cleanup();
-			mOkOnClickListener = null;
-		}
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mOkButton!=null) {
+            mOkButton.setOnClickListener(null);
+            mOkButton = null;
+        }
+        if (mOkOnClickListener!=null) {
+            mOkOnClickListener.cleanup();
+            mOkOnClickListener = null;
+        }
 
         for (int index=0; index< radiogroup_count; index++) {
             if (mRadioGroupListeners[index] != null) {
                 mRadioGroupListeners[index] = null;
             }
         }
-	}
+    }
 
 
-	static private class OkOnClickListener implements DialogInterface.OnClickListener {
-		DeveloperDialogFragment hostFragment;
-		public OkOnClickListener(DeveloperDialogFragment hostFragment) {
-			super();
-			this.hostFragment = hostFragment;
-		}
-		public void cleanup() { hostFragment = null; }
-		public void onClick(DialogInterface dialog, int which) {
+    static private class OkOnClickListener implements DialogInterface.OnClickListener {
+        DeveloperDialogFragment hostFragment;
+        public OkOnClickListener(DeveloperDialogFragment hostFragment) {
+            super();
+            this.hostFragment = hostFragment;
+        }
+        public void cleanup() { hostFragment = null; }
+        public void onClick(DialogInterface dialog, int which) {
             // Save to default file.
             hostFragment.mOptions.save(hostFragment.getActivity());
             // delete temp file
@@ -217,30 +217,30 @@ public class DeveloperDialogFragment extends DialogFragment {
             // must reside on the bottom activity of a stack. Once this activity is closed,
             // the entire app should be closed.
             hostFragment.getActivity().finish();
-		}
-	}
-	
+        }
+    }
+    
 
-	private static class SwitchOnCheckedChangeListener implements OnCheckedChangeListener {
-		DeveloperDialogFragment hostFragment;
-		int index;
-		public SwitchOnCheckedChangeListener(DeveloperDialogFragment hostFragment, int index) {
-			super();
-			this.hostFragment = hostFragment;
-			this.index = index;
-		}
-		@Override
-		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-			Savelog.d(TAG, debug, "OnCheckedChanged for item " + index + " is now " + isChecked);
+    private static class SwitchOnCheckedChangeListener implements OnCheckedChangeListener {
+        DeveloperDialogFragment hostFragment;
+        int index;
+        public SwitchOnCheckedChangeListener(DeveloperDialogFragment hostFragment, int index) {
+            super();
+            this.hostFragment = hostFragment;
+            this.index = index;
+        }
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            Savelog.d(TAG, debug, "OnCheckedChanged for item " + index + " is now " + isChecked);
             hostFragment.mOptions.setBinaryOptions(index, isChecked);
             // save data to temp file
             hostFragment.mOptions.save(hostFragment.getActivity(), tmpFilename);
             hostFragment.getArguments().putBoolean(EXTRA_resume, true);
-		}
-	}
+        }
+    }
 
-	
-	private static class SeekBarOnChangedListener implements SeekBar.OnSeekBarChangeListener {
+    
+    private static class SeekBarOnChangedListener implements SeekBar.OnSeekBarChangeListener {
         DeveloperDialogFragment hostFragment;
         int index;
         double min;
@@ -263,70 +263,70 @@ public class DeveloperDialogFragment extends DialogFragment {
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {}
     }
-	
-	
-	private static class BinaryOptionsAdapter extends ArrayAdapter<String> {
+    
+    
+    private static class BinaryOptionsAdapter extends ArrayAdapter<String> {
         String[] labels = DeveloperOptions.getBinaryOptionLabels();
         boolean[] values;
-		DeveloperDialogFragment hostFragment;
-		Context appContext;
+        DeveloperDialogFragment hostFragment;
+        Context appContext;
 
-		public BinaryOptionsAdapter(DeveloperDialogFragment hostFragment) {
-			super(hostFragment.getActivity(), R.layout.list_item_developer_onoff, DeveloperOptions.getBinaryOptionLabels());
-			this.hostFragment = hostFragment;
-			appContext = hostFragment.getActivity().getApplicationContext();
+        public BinaryOptionsAdapter(DeveloperDialogFragment hostFragment) {
+            super(hostFragment.getActivity(), R.layout.list_item_developer_onoff, DeveloperOptions.getBinaryOptionLabels());
+            this.hostFragment = hostFragment;
+            appContext = hostFragment.getActivity().getApplicationContext();
             values = hostFragment.mOptions.getBinaryOptions();
-		}
- 		@Override
-		public View getView(final int position, View convertView, ViewGroup parent) {
-			if (convertView==null) {
-				LayoutInflater inflater = (LayoutInflater) appContext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-				convertView = inflater.inflate(R.layout.list_item_developer_onoff, parent, false);
-			}
-			TextView nameView = (TextView) convertView.findViewById(R.id.listItem_developerOnOff_name_id);
+        }
+         @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            if (convertView==null) {
+                LayoutInflater inflater = (LayoutInflater) appContext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+                convertView = inflater.inflate(R.layout.list_item_developer_onoff, parent, false);
+            }
+            TextView nameView = (TextView) convertView.findViewById(R.id.listItem_developerOnOff_name_id);
             nameView.setText(labels[position]);
             
-			Switch toggle = (Switch) convertView.findViewById(R.id.listItem_developerOnOff_toggle_id);
+            Switch toggle = (Switch) convertView.findViewById(R.id.listItem_developerOnOff_toggle_id);
 
-			// ATTENTION: 
-			// The toggle might already have a listener if the view has been recycled, 
-			// This pre-existing listener may cause the toggle to modify its own value.
-			// It is very important to remove any old listener before 
-			// setting the value of the toggle. 
-			toggle.setOnCheckedChangeListener(null);
+            // ATTENTION: 
+            // The toggle might already have a listener if the view has been recycled, 
+            // This pre-existing listener may cause the toggle to modify its own value.
+            // It is very important to remove any old listener before 
+            // setting the value of the toggle. 
+            toggle.setOnCheckedChangeListener(null);
             
-			toggle.setChecked(values[position]);
-			
-			SwitchOnCheckedChangeListener toggleOnCheckedChangeListener = new SwitchOnCheckedChangeListener(hostFragment, position);
-			toggle.setOnCheckedChangeListener(toggleOnCheckedChangeListener);
+            toggle.setChecked(values[position]);
+            
+            SwitchOnCheckedChangeListener toggleOnCheckedChangeListener = new SwitchOnCheckedChangeListener(hostFragment, position);
+            toggle.setOnCheckedChangeListener(toggleOnCheckedChangeListener);
 
 
 
-			return convertView;
-		}
-	}
-	
-	
-	
-	private static class RadioGroupOnCheckedChangeListener implements RadioGroup.OnCheckedChangeListener {
-		DeveloperDialogFragment hostFragment;
+            return convertView;
+        }
+    }
+    
+    
+    
+    private static class RadioGroupOnCheckedChangeListener implements RadioGroup.OnCheckedChangeListener {
+        DeveloperDialogFragment hostFragment;
         int index;
-		public RadioGroupOnCheckedChangeListener(DeveloperDialogFragment hostFragment, int index) {
-			super();
-			this.hostFragment = hostFragment;
+        public RadioGroupOnCheckedChangeListener(DeveloperDialogFragment hostFragment, int index) {
+            super();
+            this.hostFragment = hostFragment;
             this.index = index;
             Savelog.d(TAG, debug, "Initialize radiogroup" + index);
-		}
-		@Override
-		public void onCheckedChanged(RadioGroup group, int checkedId) {
-			Savelog.d(TAG, debug, "checked id=" + checkedId);
+        }
+        @Override
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            Savelog.d(TAG, debug, "checked id=" + checkedId);
             hostFragment.mOptions.setMultipleChoiceOptions(index, checkedId);
             // save to temp file
             hostFragment.mOptions.save(hostFragment.getActivity(), tmpFilename);
             hostFragment.getArguments().putBoolean(EXTRA_resume, true);
         }
-	}
+    }
 
-	
+    
 
 }

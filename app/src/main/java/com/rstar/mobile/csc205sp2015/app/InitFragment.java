@@ -28,19 +28,19 @@ import com.rstar.mobile.csc205sp2015.registered.api.PrivateSite;
  */
 
 public class InitFragment extends Fragment {
-	private static final String TAG = InitFragment.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
+    private static final String TAG = InitFragment.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
 
-	public static InitFragment newInstance() {
-		Bundle args = new Bundle();
-		InitFragment fragment = new InitFragment();
-		fragment.setArguments(args);
-		return fragment;
-	}
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    public static InitFragment newInstance() {
+        Bundle args = new Bundle();
+        InitFragment fragment = new InitFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         // Put the course on a fragment so that checking status is done only once,
         // independent of configuration change.
         Savelog.d(TAG, debug, "InitFragment created(). App opening.");
@@ -61,11 +61,11 @@ public class InitFragment extends Fragment {
         }
 
 
-		// Make sure to retain the fragment so that installation is
-		// not restarted at every rotation
-		setRetainInstance(true);
-		
-	} // end to implementing onCreate()
-	
+        // Make sure to retain the fragment so that installation is
+        // not restarted at every rotation
+        setRetainInstance(true);
+        
+    } // end to implementing onCreate()
+    
 
 }

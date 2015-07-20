@@ -49,15 +49,15 @@ import java.io.File;
 import java.io.IOException;
 
 public class HomeworkFragment extends Fragment {
-	private static final String TAG = HomeworkFragment.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
-	
-	private static final String EXTRA_ModuleNumber = HomeworkFragment.class.getSimpleName()+".ModuleNumber";
+    private static final String TAG = HomeworkFragment.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
+    
+    private static final String EXTRA_ModuleNumber = HomeworkFragment.class.getSimpleName()+".ModuleNumber";
     private static final String EXTRA_QuestionNumber = HomeworkFragment.class.getSimpleName()+".QuestionNumber";
 
     public static final int DefaultQuestionNumber = 1;
 
-	private int mModuleNumber;
+    private int mModuleNumber;
     private int mNumberOfQuestions;
     private int mQuestionNumber;
     private int mPosition;
@@ -82,23 +82,23 @@ public class HomeworkFragment extends Fragment {
     private EditText mAnswerView = null;
     private Button mButton = null;
 
-	// Supply the module number as an argument to the newly created hostFragment.
-	public static HomeworkFragment newInstance(int moduleNumber, int questionNumber) {
-		Bundle args = new Bundle();
-		args.putInt(EXTRA_ModuleNumber, moduleNumber);
+    // Supply the module number as an argument to the newly created hostFragment.
+    public static HomeworkFragment newInstance(int moduleNumber, int questionNumber) {
+        Bundle args = new Bundle();
+        args.putInt(EXTRA_ModuleNumber, moduleNumber);
         args.putInt(EXTRA_QuestionNumber, questionNumber);
 
-		HomeworkFragment fragment = new HomeworkFragment();
-		fragment.setArguments(args);
-		return fragment;
-	}
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);		
-		Savelog.d(TAG, debug, "onCreate() entered");
+        HomeworkFragment fragment = new HomeworkFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);        
+        Savelog.d(TAG, debug, "onCreate() entered");
 
-		mModuleNumber = getArguments().getInt(EXTRA_ModuleNumber, Module.DefaultModuleNumber);
+        mModuleNumber = getArguments().getInt(EXTRA_ModuleNumber, Module.DefaultModuleNumber);
         mQuestionNumber = getArguments().getInt(EXTRA_QuestionNumber, DefaultQuestionNumber);
 
         mPosition = mQuestionNumber - 1;
@@ -129,17 +129,17 @@ public class HomeworkFragment extends Fragment {
 
         setRetainInstance(true);
 
-	} // end to implementing onCreate()
-	
-	
-	
-	
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-		View v;
-		Savelog.d(TAG, debug, "onCreateView() entered");
+    } // end to implementing onCreate()
+    
+    
+    
+    
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+        View v;
+        Savelog.d(TAG, debug, "onCreateView() entered");
 
-		v = inflater.inflate(R.layout.fragment_homework, parent, false);
+        v = inflater.inflate(R.layout.fragment_homework, parent, false);
 
         mSpinner = (Spinner) v.findViewById(R.id.fragmentHomework_question_id);
         mScoreView = (TextView) v.findViewById(R.id.fragmentHomework_points_id);
@@ -200,19 +200,19 @@ public class HomeworkFragment extends Fragment {
         mSaveOnClickListener = new SaveOnClickListener(this);
         mButton.setOnClickListener(mSaveOnClickListener);
         return v;
-	} // end to implementing onCreateView() 
-	
-	
+    } // end to implementing onCreateView() 
+    
+    
 
 
 
 
-	
-	public int getmoduleNumber() {
-		return mModuleNumber;
-	}
+    
+    public int getmoduleNumber() {
+        return mModuleNumber;
+    }
 
-	
+    
 
 
 

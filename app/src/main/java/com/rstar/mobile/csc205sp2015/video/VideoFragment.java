@@ -46,15 +46,15 @@ import java.io.File;
 
 
 public class VideoFragment extends Fragment {
-	private static final String TAG = VideoFragment.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
+    private static final String TAG = VideoFragment.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
 
     public static final String EXTRA_ModuleNumber = VideoFragment.class.getSimpleName()+".ModuleNumber";
     public static final String EXTRA_PageNumber = VideoFragment.class.getSimpleName()+".PageNumber";
 
 
-	private static final int ButtonStateIdle = 0;
-	private static final int ButtonStatePlaying = 2;
+    private static final int ButtonStateIdle = 0;
+    private static final int ButtonStatePlaying = 2;
 
     private int mModuleNumber;
     private int mPageNumber;
@@ -64,37 +64,37 @@ public class VideoFragment extends Fragment {
     private int position = 0;
 
 
-	public static VideoFragment newInstance(int moduleNumber, int pageNumber) {
-		Bundle args = new Bundle();
+    public static VideoFragment newInstance(int moduleNumber, int pageNumber) {
+        Bundle args = new Bundle();
         args.putInt(EXTRA_ModuleNumber, moduleNumber);
         args.putInt(EXTRA_PageNumber, pageNumber);
 
-   		VideoFragment fragment = new VideoFragment();
-		fragment.setArguments(args);
-		return fragment;
-	}
-	
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		Savelog.d(TAG, debug, "onCreate()");
+           VideoFragment fragment = new VideoFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+    
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Savelog.d(TAG, debug, "onCreate()");
 
         mModuleNumber = getArguments().getInt(EXTRA_ModuleNumber, Module.DefaultModuleNumber);
         mPageNumber = getArguments().getInt(EXTRA_PageNumber, Module.DefaultPageNumber);
 
         Course course = Course.get(getActivity());
 
-		mDataFile = course.getModule(mModuleNumber).getVideoFile(getActivity(), mPageNumber);
+        mDataFile = course.getModule(mModuleNumber).getVideoFile(getActivity(), mPageNumber);
 
         Savelog.d(TAG, debug, "Going to open video file: " + mDataFile + " size=" + mDataFile.length());
         if (mMediaControls == null) {
             mMediaControls = new MediaController(getActivity().getApplicationContext());
         }
 
-		setRetainInstance(true);
+        setRetainInstance(true);
 
-	} // end to implementing onCreate()
+    } // end to implementing onCreate()
 
 
 

@@ -41,33 +41,33 @@ import java.lang.ref.WeakReference;
  */
 
 public class DownloadFragment extends Fragment {
-	private static final String TAG = DownloadFragment.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
+    private static final String TAG = DownloadFragment.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
 
     private static final String EXTRA_Type = DownloadFragment.class.getSimpleName()+".Type";
-	private static final String EXTRA_Trim = DownloadFragment.class.getSimpleName()+".Trim";
+    private static final String EXTRA_Trim = DownloadFragment.class.getSimpleName()+".Trim";
     private static final String EXTRA_ModuleNumber = DownloadFragment.class.getSimpleName()+".ModuleNumber";
     private static final String EXTRA_PageNumber = DownloadFragment.class.getSimpleName()+".PageNumber";
 
 
-	private DownloaderAsyncTask mDownloaderAsyncTask = null;
+    private DownloaderAsyncTask mDownloaderAsyncTask = null;
     private String downloadStatus = "";
-	
-	public static DownloadFragment newInstance(int type, boolean trim, int moduleNumber, int pageNumber) {
-		Bundle args = new Bundle();
+    
+    public static DownloadFragment newInstance(int type, boolean trim, int moduleNumber, int pageNumber) {
+        Bundle args = new Bundle();
         args.putInt(EXTRA_Type, type);
-		args.putBoolean(EXTRA_Trim, trim);
+        args.putBoolean(EXTRA_Trim, trim);
         args.putInt(EXTRA_ModuleNumber, moduleNumber);
         args.putInt(EXTRA_PageNumber, pageNumber);
 
-		DownloadFragment fragment = new DownloadFragment();
-		fragment.setArguments(args);
-		return fragment;
-	}
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+        DownloadFragment fragment = new DownloadFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         int type;
         boolean trim;
@@ -75,49 +75,49 @@ public class DownloadFragment extends Fragment {
         int pageNumber;
 
         type = getArguments().getInt(EXTRA_Type, DownloadActivity.Type_default);
-		trim = getArguments().getBoolean(EXTRA_Trim, AppSettings.Trim);
+        trim = getArguments().getBoolean(EXTRA_Trim, AppSettings.Trim);
         moduleNumber = getArguments().getInt(EXTRA_ModuleNumber, Module.DefaultModuleNumber);
         pageNumber = getArguments().getInt(EXTRA_PageNumber, Module.DefaultPageNumber);
 
-		// Download whatever data in an asynctask as this requires internet too
-		mDownloaderAsyncTask = new DownloaderAsyncTask(this, type, trim, moduleNumber, pageNumber);
-		mDownloaderAsyncTask.execute();
+        // Download whatever data in an asynctask as this requires internet too
+        mDownloaderAsyncTask = new DownloaderAsyncTask(this, type, trim, moduleNumber, pageNumber);
+        mDownloaderAsyncTask.execute();
 
-		// Make sure to retain the fragment so that installation is
-		// not restarted at every rotation
-		setRetainInstance(true);
-		
-	} // end to implementing onCreate()
-	
-
-
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-
-		if (mDownloaderAsyncTask!=null) {
-			mDownloaderAsyncTask.cancel(true);
-			mDownloaderAsyncTask = null;
-		}
-	}
+        // Make sure to retain the fragment so that installation is
+        // not restarted at every rotation
+        setRetainInstance(true);
+        
+    } // end to implementing onCreate()
+    
 
 
-	
-	
-	
-	public static class DownloaderAsyncTask extends AsyncTask<Object, String, Boolean> {
-		private Context appContext;
-		private final WeakReference<DownloadFragment> hostFragmentReference;
-		Exception err = null;
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (mDownloaderAsyncTask!=null) {
+            mDownloaderAsyncTask.cancel(true);
+            mDownloaderAsyncTask = null;
+        }
+    }
+
+
+    
+    
+    
+    public static class DownloaderAsyncTask extends AsyncTask<Object, String, Boolean> {
+        private Context appContext;
+        private final WeakReference<DownloadFragment> hostFragmentReference;
+        Exception err = null;
         int type;
         boolean trim;
         int moduleNumber;
         int pageNumber;
 
-		public DownloaderAsyncTask(DownloadFragment hostFragment, int type, boolean trim, int moduleNumber, int pageNumber) {
-			super();
-			this.appContext = hostFragment.getActivity().getApplicationContext();
-			hostFragmentReference = new WeakReference<DownloadFragment>(hostFragment);
+        public DownloaderAsyncTask(DownloadFragment hostFragment, int type, boolean trim, int moduleNumber, int pageNumber) {
+            super();
+            this.appContext = hostFragment.getActivity().getApplicationContext();
+            hostFragmentReference = new WeakReference<DownloadFragment>(hostFragment);
 
             hostFragment.postProgress(Message.toastDownloadInProgress);
 
@@ -126,10 +126,10 @@ public class DownloadFragment extends Fragment {
             this.moduleNumber = moduleNumber;
             this.pageNumber = pageNumber;
             Savelog.d(TAG, debug, "Download type=" + type + " module=" + moduleNumber + " page=" + pageNumber + " trim=" + trim);
-		}
+        }
 
-		@Override
-		protected Boolean doInBackground(Object... params) {
+        @Override
+        protected Boolean doInBackground(Object... params) {
             boolean result = false;
             if (IO.isNetworkAvailable(appContext)) {
                 try {
@@ -163,27 +163,27 @@ public class DownloadFragment extends Fragment {
                 return false;
             }
 
-		}
+        }
 
-		@Override
-		protected void onProgressUpdate(String... progress) {
-			final DownloadFragment hostFragment = hostFragmentReference.get();
-			if (hostFragment != null) {
-				Activity activity = hostFragment.getActivity();
-				if (activity!=null && !activity.isFinishing()) {
-					((DownloadActivity) activity).postProgress(progress[0]);
-				}
-			}
-		}
+        @Override
+        protected void onProgressUpdate(String... progress) {
+            final DownloadFragment hostFragment = hostFragmentReference.get();
+            if (hostFragment != null) {
+                Activity activity = hostFragment.getActivity();
+                if (activity!=null && !activity.isFinishing()) {
+                    ((DownloadActivity) activity).postProgress(progress[0]);
+                }
+            }
+        }
 
-		@Override
-		protected void onPostExecute(Boolean success) {
-			super.onPostExecute(success);
+        @Override
+        protected void onPostExecute(Boolean success) {
+            super.onPostExecute(success);
 
-			if (hostFragmentReference != null) {
-				final DownloadFragment hostFragment = hostFragmentReference.get();
-				if (hostFragment != null) {
-					Activity activity = hostFragment.getActivity();
+            if (hostFragmentReference != null) {
+                final DownloadFragment hostFragment = hostFragmentReference.get();
+                if (hostFragment != null) {
+                    Activity activity = hostFragment.getActivity();
 
 
                     if (isCancelled()) {
@@ -212,28 +212,28 @@ public class DownloadFragment extends Fragment {
                         }
                     }
 
-					// make sure to close this activity when all is done.
-					if (activity!=null && !activity.isFinishing()) {
-						activity.finish();
-					}
-				}
-			}
-			cleanup();
-			Savelog.d(TAG, debug, "AsyncTask completed.");
-		}
+                    // make sure to close this activity when all is done.
+                    if (activity!=null && !activity.isFinishing()) {
+                        activity.finish();
+                    }
+                }
+            }
+            cleanup();
+            Savelog.d(TAG, debug, "AsyncTask completed.");
+        }
 
-		void cleanup() {
+        void cleanup() {
             appContext = null;
-		}
-		
-		@Override
-		protected void onCancelled() {
-			super.onCancelled();
+        }
+        
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
             clearDownload(appContext, type, moduleNumber, pageNumber);
             cleanup();
-			Savelog.d(TAG, debug, "AsyncTask canceled.");
-		}
-	}
+            Savelog.d(TAG, debug, "AsyncTask canceled.");
+        }
+    }
 
     public String getProcess() {
         return downloadStatus;

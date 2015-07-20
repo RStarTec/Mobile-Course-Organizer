@@ -32,7 +32,7 @@ import com.rstar.mobile.csc205sp2015.tools.representation.NumToRepFragment;
 import com.rstar.mobile.csc205sp2015.tools.representation.RepToNumFragment;
 
 public class ToolsActivity extends Activity {
-	public static final String TAG = ToolsActivity.class.getSimpleName()+"_class";
+    public static final String TAG = ToolsActivity.class.getSimpleName()+"_class";
 
     public static final String EXTRA_Type = ToolsActivity.class.getSimpleName()+".Type";
 
@@ -49,20 +49,20 @@ public class ToolsActivity extends Activity {
     private Fragment fragment;
     private int fragmentId;
 
-	//OnCreate Method:
-	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_tools);
+    //OnCreate Method:
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_tools);
         fragmentId = R.id.activityTools_container;
 
         mType = getIntent().getIntExtra(EXTRA_Type, Type_default);
 
         // Check if fragment already exists
-		FragmentManager fm = getFragmentManager();
-		fragment = fm.findFragmentById(fragmentId);
-		if (fragment == null) {
+        FragmentManager fm = getFragmentManager();
+        fragment = fm.findFragmentById(fragmentId);
+        if (fragment == null) {
             if (mType == Type_numToRep) {
                 fragment = NumToRepFragment.newInstance();
             }
@@ -82,9 +82,9 @@ public class ToolsActivity extends Activity {
                 fragment = Mem2LFragment.newInstance();
             }
 
-			fm.beginTransaction().add(fragmentId, fragment).commit();
-		}
-	}
+            fm.beginTransaction().add(fragmentId, fragment).commit();
+        }
+    }
 
 
 

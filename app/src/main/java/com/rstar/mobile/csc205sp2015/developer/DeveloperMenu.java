@@ -38,85 +38,85 @@ public class DeveloperMenu {
     private static final String TAG = DeveloperMenu.class.getSimpleName()+"_class";
     private static final boolean debug = AppSettings.defaultDebug;
 
-	private int iconIds[] = {
-			R.drawable.ic_action_discard,
-            R.drawable.ic_action_discard,
-			R.drawable.ic_action_discard,
+    private int iconIds[] = {
             R.drawable.ic_action_discard,
             R.drawable.ic_action_discard,
-			R.drawable.ic_action_send_now,
+            R.drawable.ic_action_discard,
+            R.drawable.ic_action_discard,
+            R.drawable.ic_action_discard,
+            R.drawable.ic_action_send_now,
             R.drawable.ic_action_send_now,
             R.drawable.ic_action_accounts,
             R.drawable.ic_action_settings,
             R.drawable.ic_action_about
-	};
-	private int nameIds[] = {
+    };
+    private int nameIds[] = {
             R.string.menu_developer_clearSQLite,
-			R.string.menu_developer_clearInternal,
+            R.string.menu_developer_clearInternal,
             R.string.menu_developer_clearPreferences,
-			R.string.menu_developer_clearLog,
+            R.string.menu_developer_clearLog,
             R.string.menu_developer_clearStatics,
             R.string.menu_developer_post,
             R.string.menu_developer_masterPost,
             R.string.menu_developer_login,
             R.string.menu_developer_moreOptions,
             R.string.menu_developer_tools
-	};
-	
-	private int ids[];
-	private boolean inUse[]; // This flag is set when the ids of the menu are set
-	
-	public DeveloperMenu() {
-		int size = nameIds.length;
-		ids = new int[size];
-		inUse = new boolean[size];
-		for (int index=0; index<size; index++) {
-			ids[index] = 0;
-			inUse[index] = false;
-		}
-	}
-	
-	public int size() { return nameIds.length;}
-	public int getLabel(int index) { 
-		if (index>=0 && index<nameIds.length)
-			return nameIds[index]; 
-		else return 0;
-	}
-	public int getIcon(int index) {
-		if (index>=0 && index<nameIds.length)
-			return iconIds[index]; 
-		else return 0;
-	}
-	public void setId(int index, int id) {
-		if (index>=0 && index<nameIds.length) {
-			ids[index] = id; 
-			inUse[index] = true;
-		}
-	}
-	public int getId(int index) {
-		if (index>=0 && index<nameIds.length)
-			return ids[index]; 
-		else return 0;
-	}
-	
-	public Menu addSubmenu(Menu menu, int submenuLabel, int groupId) {
-		int lastId = menu.size();
-		
-		SubMenu subMenu = menu.addSubMenu(submenuLabel);
-		for (int index=0; index<size(); index++) {
-			int newId = lastId+index;
-			setId(index, newId);
-			subMenu.add(groupId, newId, index, getLabel(index)).setIcon(getIcon(index));
-		}
-		return menu;
-	}
-	
-	public boolean act(int itemId, Activity activity) {
-		
-		for (int index=0; index<size(); index++) {
-			int optionId = ids[index];
-			int optionName = nameIds[index];
-			if (itemId==optionId && inUse[index]) {
+    };
+    
+    private int ids[];
+    private boolean inUse[]; // This flag is set when the ids of the menu are set
+    
+    public DeveloperMenu() {
+        int size = nameIds.length;
+        ids = new int[size];
+        inUse = new boolean[size];
+        for (int index=0; index<size; index++) {
+            ids[index] = 0;
+            inUse[index] = false;
+        }
+    }
+    
+    public int size() { return nameIds.length;}
+    public int getLabel(int index) { 
+        if (index>=0 && index<nameIds.length)
+            return nameIds[index]; 
+        else return 0;
+    }
+    public int getIcon(int index) {
+        if (index>=0 && index<nameIds.length)
+            return iconIds[index]; 
+        else return 0;
+    }
+    public void setId(int index, int id) {
+        if (index>=0 && index<nameIds.length) {
+            ids[index] = id; 
+            inUse[index] = true;
+        }
+    }
+    public int getId(int index) {
+        if (index>=0 && index<nameIds.length)
+            return ids[index]; 
+        else return 0;
+    }
+    
+    public Menu addSubmenu(Menu menu, int submenuLabel, int groupId) {
+        int lastId = menu.size();
+        
+        SubMenu subMenu = menu.addSubMenu(submenuLabel);
+        for (int index=0; index<size(); index++) {
+            int newId = lastId+index;
+            setId(index, newId);
+            subMenu.add(groupId, newId, index, getLabel(index)).setIcon(getIcon(index));
+        }
+        return menu;
+    }
+    
+    public boolean act(int itemId, Activity activity) {
+        
+        for (int index=0; index<size(); index++) {
+            int optionId = ids[index];
+            int optionName = nameIds[index];
+            if (itemId==optionId && inUse[index]) {
                 if (optionName==R.string.menu_developer_clearSQLite) {
                     Search.clear(activity);
                     return true;
@@ -126,10 +126,10 @@ public class DeveloperMenu {
                             .edit().clear().commit();
                     return true;
                 }
-				else if (optionName==R.string.menu_developer_clearInternal) {
-					IO.clearInternalFiles(activity);
-					return true;
-				}
+                else if (optionName==R.string.menu_developer_clearInternal) {
+                    IO.clearInternalFiles(activity);
+                    return true;
+                }
                 else if (optionName==R.string.menu_developer_clearStatics) {
                     Course.get(activity).clear(activity);
                     PrivateSite.get(activity).clear(activity);
@@ -137,10 +137,10 @@ public class DeveloperMenu {
                     return true;
                 }
 
-				else if (optionName==R.string.menu_developer_clearLog) {
-					Savelog.clear();
-					return true;
-				}
+                else if (optionName==R.string.menu_developer_clearLog) {
+                    Savelog.clear();
+                    return true;
+                }
                 else if (optionName==R.string.menu_developer_login) {
                     Intent intent = new Intent(activity, DeveloperActivity.class);
                     intent.putExtra(DeveloperActivity.EXTRA_Type, DeveloperActivity.Type_master);
@@ -174,12 +174,12 @@ public class DeveloperMenu {
                     DeveloperDialogFragment dialog = DeveloperDialogFragment.newInstance();
                     dialog.show(fm, DeveloperDialogFragment.dialogTag);
                     return true;
-				}
-			}
-			else {} // no action
-		}
-		return false;
-	}
-	
-	
+                }
+            }
+            else {} // no action
+        }
+        return false;
+    }
+    
+    
 }

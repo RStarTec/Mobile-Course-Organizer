@@ -28,46 +28,46 @@ import com.rstar.mobile.csc205sp2015.io.Savelog;
 import com.rstar.mobile.csc205sp2015.module.Module;
 
 public class SearchActivity extends Activity {
-	private static final String TAG = SearchActivity.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
+    private static final String TAG = SearchActivity.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
 
     public static final String EXTRA_ModuleNumber = SearchActivity.class.getSimpleName() + ".ModuleNumber";
-	public static final String EXTRA_Keyword = SearchActivity.class.getSimpleName()+"_class" + ".Keyword";
+    public static final String EXTRA_Keyword = SearchActivity.class.getSimpleName()+"_class" + ".Keyword";
 
-	private Fragment mSearchFragment = null;
+    private Fragment mSearchFragment = null;
 
     private int mModuleNumber;
-	private String mKeyword;
+    private String mKeyword;
 
     private int fragmentId;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		Savelog.d(TAG, debug, "Starting search activity.");
-		
-		setContentView(R.layout.activity_search);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Savelog.d(TAG, debug, "Starting search activity.");
+        
+        setContentView(R.layout.activity_search);
         fragmentId = R.id.activitySearch_container;
 
         mModuleNumber = getIntent().getIntExtra(EXTRA_ModuleNumber, Module.DefaultModuleNumber);
-		mKeyword = getIntent().getStringExtra(EXTRA_Keyword);
-		if (mKeyword==null) mKeyword = "";
+        mKeyword = getIntent().getStringExtra(EXTRA_Keyword);
+        if (mKeyword==null) mKeyword = "";
 
-		FragmentManager fm = getFragmentManager();
+        FragmentManager fm = getFragmentManager();
 
-		mSearchFragment = fm.findFragmentById(fragmentId);
-		if (mSearchFragment ==null) {
-			mSearchFragment = SearchFragment.newInstance(mModuleNumber, mKeyword);
-			fm.beginTransaction().add(fragmentId, mSearchFragment).commit();
-		}
+        mSearchFragment = fm.findFragmentById(fragmentId);
+        if (mSearchFragment ==null) {
+            mSearchFragment = SearchFragment.newInstance(mModuleNumber, mKeyword);
+            fm.beginTransaction().add(fragmentId, mSearchFragment).commit();
+        }
 
-	}
+    }
 
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		Savelog.d(TAG, debug, "Destroying search activity.");
-	}
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Savelog.d(TAG, debug, "Destroying search activity.");
+    }
 
 
 }

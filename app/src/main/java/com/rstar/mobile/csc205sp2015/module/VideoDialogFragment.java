@@ -35,10 +35,10 @@ import com.rstar.mobile.csc205sp2015.video.VideoActivity;
 import java.io.File;
 
 public class VideoDialogFragment extends DialogFragment {
-	private static final String TAG = VideoDialogFragment.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
+    private static final String TAG = VideoDialogFragment.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
 
-	public static final String dialogTag = VideoDialogFragment.class.getSimpleName()+"_tag";
+    public static final String dialogTag = VideoDialogFragment.class.getSimpleName()+"_tag";
     private static final String EXTRA_ModuleNumber = VideoDialogFragment.class.getSimpleName()+".ModuleNumber";
     private static final String EXTRA_PageNumber = VideoDialogFragment.class.getSimpleName()+".PageNumber";
 
@@ -56,23 +56,23 @@ public class VideoDialogFragment extends DialogFragment {
     private Button mWatchButton;
     private Button mReloadButton;
 
-	private Button mOkButton = null;
+    private Button mOkButton = null;
 
-	
-	public static VideoDialogFragment newInstance(int moduleNumber, int pageNumber) {
+    
+    public static VideoDialogFragment newInstance(int moduleNumber, int pageNumber) {
         Bundle args = new Bundle();
         args.putInt(EXTRA_ModuleNumber, moduleNumber);
         args.putInt(EXTRA_PageNumber, pageNumber);
 
-		VideoDialogFragment fragment = new VideoDialogFragment();
-		fragment.setArguments(args);
-		return fragment;
-	}
-	
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+        VideoDialogFragment fragment = new VideoDialogFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+    
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         Savelog.d(TAG, debug, "onCreate() entered");
 
@@ -81,15 +81,15 @@ public class VideoDialogFragment extends DialogFragment {
 
         videoFile = Course.get(getActivity()).getModule(mModuleNumber).getVideoFile(getActivity(), mPageNumber);
 
-		setRetainInstance(true);
-		Savelog.d(TAG, debug, "This dialog fragment is retained.");
-	}
+        setRetainInstance(true);
+        Savelog.d(TAG, debug, "This dialog fragment is retained.");
+    }
 
-	
-	/* This dialog has a title, a TextView and one button (OK).
-	 */
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		View v = getActivity().getLayoutInflater().inflate(R.layout.dialog_video, null);
+    
+    /* This dialog has a title, a TextView and one button (OK).
+     */
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        View v = getActivity().getLayoutInflater().inflate(R.layout.dialog_video, null);
 
         if (videoFile!=null) {
             Module module = Course.get(getActivity()).getModule(mModuleNumber);
@@ -114,52 +114,52 @@ public class VideoDialogFragment extends DialogFragment {
         mReloadButton.setOnClickListener(null);
         mReloadButton.setOnClickListener(new OnButtonClickedListener(this, Type_reload));
 
-		/* Use the Builder class for convenient dialog construction.
-		 * The dialog builder just needs to handle OK.
-		 */
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setView(v)
-			.setPositiveButton(R.string.button_OK, null);
-		
-		Dialog dialog = builder.create();
-		return dialog;
-		
-	} // end to onCreateDialog()
-	
-	
-	@Override
-	public void onStart() {
-		super.onStart();
-		AlertDialog d = (AlertDialog) getDialog();
-		if (d!=null) {
-			mOkButton = (Button) d.getButton(Dialog.BUTTON_POSITIVE);
-		}
-	}
+        /* Use the Builder class for convenient dialog construction.
+         * The dialog builder just needs to handle OK.
+         */
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(v)
+            .setPositiveButton(R.string.button_OK, null);
+        
+        Dialog dialog = builder.create();
+        return dialog;
+        
+    } // end to onCreateDialog()
+    
+    
+    @Override
+    public void onStart() {
+        super.onStart();
+        AlertDialog d = (AlertDialog) getDialog();
+        if (d!=null) {
+            mOkButton = (Button) d.getButton(Dialog.BUTTON_POSITIVE);
+        }
+    }
 
-	@Override
-	public void onDestroyView() {
-		/* As of Aug 2013, Dialog Fragment has a bug with its 
-		 * SetRetainedInstance() method. Therefore, the following
-		 * need to be done to retain the dialog fragment
-		 */
-		if (getDialog()!=null && getRetainInstance()) {
-			getDialog().setDismissMessage(null);
-		}
-		super.onDestroyView();
+    @Override
+    public void onDestroyView() {
+        /* As of Aug 2013, Dialog Fragment has a bug with its 
+         * SetRetainedInstance() method. Therefore, the following
+         * need to be done to retain the dialog fragment
+         */
+        if (getDialog()!=null && getRetainInstance()) {
+            getDialog().setDismissMessage(null);
+        }
+        super.onDestroyView();
 
         if (mWatchButton !=null)
             mWatchButton.setOnClickListener(null);
 
         if (mOkButton!=null) {
-			mOkButton.setOnClickListener(null);
-			mOkButton = null;
-		}
-	}
+            mOkButton.setOnClickListener(null);
+            mOkButton = null;
+        }
+    }
 
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-	}
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 
     private static class OnButtonClickedListener implements View.OnClickListener {
         VideoDialogFragment hostFragment;

@@ -43,13 +43,13 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 
 public class HomeworkScoreFragment extends Fragment {
-	private static final String TAG = HomeworkScoreFragment.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
-	
-	private static final String EXTRA_ModuleNumber = HomeworkScoreFragment.class.getSimpleName()+".ModuleNumber";
+    private static final String TAG = HomeworkScoreFragment.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
+    
+    private static final String EXTRA_ModuleNumber = HomeworkScoreFragment.class.getSimpleName()+".ModuleNumber";
 
     
-	private int mModuleNumber;
+    private int mModuleNumber;
     private double mScore = 0;
     private String mSubmittedData = "";
     private String mFeedback = "";
@@ -60,22 +60,22 @@ public class HomeworkScoreFragment extends Fragment {
 
     private ScoreAsyncTask mScoreAsyncTask = null;
 
-	// Supply the module number as an argument to the newly created hostFragment.
-	public static HomeworkScoreFragment newInstance(int moduleNumber) {
-		Bundle args = new Bundle();
-		args.putInt(EXTRA_ModuleNumber, moduleNumber);
+    // Supply the module number as an argument to the newly created hostFragment.
+    public static HomeworkScoreFragment newInstance(int moduleNumber) {
+        Bundle args = new Bundle();
+        args.putInt(EXTRA_ModuleNumber, moduleNumber);
 
-		HomeworkScoreFragment fragment = new HomeworkScoreFragment();
-		fragment.setArguments(args);
-		return fragment;
-	}
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);		
-		Savelog.d(TAG, debug, "onCreate() entered");
+        HomeworkScoreFragment fragment = new HomeworkScoreFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);        
+        Savelog.d(TAG, debug, "onCreate() entered");
 
-		mModuleNumber = getArguments().getInt(EXTRA_ModuleNumber, Module.DefaultModuleNumber);
+        mModuleNumber = getArguments().getInt(EXTRA_ModuleNumber, Module.DefaultModuleNumber);
 
         Student student = new Student(getActivity());
 
@@ -88,17 +88,17 @@ public class HomeworkScoreFragment extends Fragment {
 
         setRetainInstance(true);
 
-	} // end to implementing onCreate()
-	
-	
-	
-	
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-		View v;
-		Savelog.d(TAG, debug, "onCreateView() entered");
+    } // end to implementing onCreate()
+    
+    
+    
+    
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+        View v;
+        Savelog.d(TAG, debug, "onCreateView() entered");
 
-		v = inflater.inflate(R.layout.fragment_homework_score, parent, false);
+        v = inflater.inflate(R.layout.fragment_homework_score, parent, false);
 
         mScoreView = (TextView) v.findViewById(R.id.fragmentHomeworkScore_total_id);
         mFeedbackView = (TextView) v.findViewById(R.id.fragmentHomeworkScore_feedback_id);
@@ -109,7 +109,7 @@ public class HomeworkScoreFragment extends Fragment {
         }
 
         return v;
-	} // end to implementing onCreateView() 
+    } // end to implementing onCreateView() 
 
 
 
@@ -125,10 +125,10 @@ public class HomeworkScoreFragment extends Fragment {
         }
     }
 
-	
-	public int getmoduleNumber() {
-		return mModuleNumber;
-	}
+    
+    public int getmoduleNumber() {
+        return mModuleNumber;
+    }
 
 
 

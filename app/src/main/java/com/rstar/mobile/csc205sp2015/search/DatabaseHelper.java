@@ -40,27 +40,27 @@ import java.util.Locale;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
  
-	// Logcat tag
-	private static final String TAG = DatabaseHelper.class.getName();
-	private static final boolean debug = AppSettings.defaultDebug;
-	
-	private static final int haloBlue = Color.rgb(51, 181, 229);  // unused
+    // Logcat tag
+    private static final String TAG = DatabaseHelper.class.getName();
+    private static final boolean debug = AppSettings.defaultDebug;
+    
+    private static final int haloBlue = Color.rgb(51, 181, 229);  // unused
 
     private static int color_highlight;  // pick a color that does not conflict with the theme
 
-	// Database Version
-	private static final int DATABASE_VERSION = 1;
+    // Database Version
+    private static final int DATABASE_VERSION = 1;
  
-	// Database Name
-	private static final String DATABASE_NAME = "TranscriptManager";
+    // Database Name
+    private static final String DATABASE_NAME = "TranscriptManager";
  
-	// Table Names
-	private static final String TABLE_SEGMENTS = "segments_table";
+    // Table Names
+    private static final String TABLE_SEGMENTS = "segments_table";
     private static final String TABLE_MODULEDATES = "moduleDates_table";  // used to record when the module was last updated
 
 
-	// Segments Table - column names
-	private static final String KEY_MODULENUMBER = "moduleNumber";
+    // Segments Table - column names
+    private static final String KEY_MODULENUMBER = "moduleNumber";
     private static final String KEY_PAGENUMBER = "slideNumber";
     private static final String KEY_SEGMENT = "segment";
 
@@ -71,15 +71,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         color_highlight = App.getContext().getResources().getColor(R.color.text_highlight);
     }
  
-	// Table Create Statements
+    // Table Create Statements
 
-	// Segments table create statement
+    // Segments table create statement
     // This table has 3 fields: (moduleNumber, pageNumber, segment)
-	private static final String CREATE_TABLE_SEGMENTS = 
-			"CREATE TABLE IF NOT EXISTS " + TABLE_SEGMENTS 
-			+ "(" + KEY_MODULENUMBER + " INTEGER,"
-				+ KEY_PAGENUMBER + " INTEGER,"
-				+ KEY_SEGMENT + " TEXT" + ")";
+    private static final String CREATE_TABLE_SEGMENTS = 
+            "CREATE TABLE IF NOT EXISTS " + TABLE_SEGMENTS 
+            + "(" + KEY_MODULENUMBER + " INTEGER,"
+                + KEY_PAGENUMBER + " INTEGER,"
+                + KEY_SEGMENT + " TEXT" + ")";
 
     // Module dates table create statement
     // This table has 2 fields: (moduleNumber, date)
@@ -89,38 +89,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     + "(" + KEY_MODULENUMBER + " INTEGER,"
                     + KEY_MODULEDATE + " TEXT" + ")";
 
-	public DatabaseHelper(Context context) {
-		super(context, DATABASE_NAME, null, DATABASE_VERSION);
-	}
+    public DatabaseHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
  
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		Savelog.d(TAG, debug, "called onCreate()");
-		
-		if (db==null || db.isReadOnly()) {
-			db.close();
-			db = this.getWritableDatabase();
-		}
-		if (db!=null) {
-			// creating required tables
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        Savelog.d(TAG, debug, "called onCreate()");
+        
+        if (db==null || db.isReadOnly()) {
+            db.close();
+            db = this.getWritableDatabase();
+        }
+        if (db!=null) {
+            // creating required tables
             Savelog.d(TAG, debug, "calling " + CREATE_TABLE_SEGMENTS);
             Savelog.d(TAG, debug, "calling " + CREATE_TABLE_MODULEDATES);
 
-			db.execSQL(CREATE_TABLE_SEGMENTS);
+            db.execSQL(CREATE_TABLE_SEGMENTS);
             db.execSQL(CREATE_TABLE_MODULEDATES);
-		}
-	}
+        }
+    }
 
-	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-	}
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    }
 
-	public static File getDatabaseFile(Context context) {
-		final String path = context.getDatabasePath(DATABASE_NAME).getPath();
-		if (path==null) return null;
-		File file = new File(path);
-		return file;
-	}
+    public static File getDatabaseFile(Context context) {
+        final String path = context.getDatabasePath(DATABASE_NAME).getPath();
+        if (path==null) return null;
+        File file = new File(path);
+        return file;
+    }
 
 
     public boolean isUpToDate(int moduleNumber, String moduleDate) {
@@ -140,38 +140,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-	private int getTableSize(SQLiteDatabase db, String tableName) {
-		int rowCount = 0;
-		if (tableName == null) { return rowCount; }
-		if (db==null || !db.isOpen()) {
-			db = this.getReadableDatabase();
-		}
+    private int getTableSize(SQLiteDatabase db, String tableName) {
+        int rowCount = 0;
+        if (tableName == null) { return rowCount; }
+        if (db==null || !db.isOpen()) {
+            db = this.getReadableDatabase();
+        }
 
-		Cursor cursor;
-		
-		cursor = db.rawQuery("SELECT COUNT(*) FROM sqlite_master WHERE type = ? AND name = ?", 
-				new String[] {"table", tableName});
-		int tableExists = 0;
+        Cursor cursor;
+        
+        cursor = db.rawQuery("SELECT COUNT(*) FROM sqlite_master WHERE type = ? AND name = ?", 
+                new String[] {"table", tableName});
+        int tableExists = 0;
 
-		if (cursor.moveToFirst()) {
-			tableExists = cursor.getInt(0);
-		}
-		cursor.close();
-				
-		// Expect tableExists=1 if a table exists, 0 means no table exists by this name.
-		if (tableExists>0) {
-			int numRows = 0;
-			Savelog.d(TAG, debug, "Table " + tableName + " exists");
-			// Check if table is empty
-			cursor = db.rawQuery("SELECT COUNT(*) FROM " + tableName, null) ;
-			if (cursor.moveToFirst()) {
-				numRows = cursor.getInt(0);
-			}
-			cursor.close();
-			rowCount = numRows;
-		}
-		return rowCount;
-	}
+        if (cursor.moveToFirst()) {
+            tableExists = cursor.getInt(0);
+        }
+        cursor.close();
+                
+        // Expect tableExists=1 if a table exists, 0 means no table exists by this name.
+        if (tableExists>0) {
+            int numRows = 0;
+            Savelog.d(TAG, debug, "Table " + tableName + " exists");
+            // Check if table is empty
+            cursor = db.rawQuery("SELECT COUNT(*) FROM " + tableName, null) ;
+            if (cursor.moveToFirst()) {
+                numRows = cursor.getInt(0);
+            }
+            cursor.close();
+            rowCount = numRows;
+        }
+        return rowCount;
+    }
 
 
     public String getModuleDate(int moduleNumber) {
@@ -230,11 +230,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void updateEntries(int moduleNumber, int pageNumber, String segments[], String moduleDate) {
         if (moduleDate==null) moduleDate = "";
 
-		SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
 
         Savelog.d(TAG, debug, "called getWritableDatabase()");
-		
-		// empty out any existing entries in table first
+        
+        // empty out any existing entries in table first
         String deleteSegments = KEY_MODULENUMBER + " = " + moduleNumber
                 + " AND " + KEY_PAGENUMBER + " = " + pageNumber;
 
@@ -274,36 +274,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(TABLE_MODULEDATES, null, insertValue);
         Savelog.d(TAG, debug, "updated module date=" + moduleDate);
 
-		db.close();
-	}
-	
-	
+        db.close();
+    }
+    
+    
 
-	
-	
-	public ArrayList<Search.Item> getAllSegments() {
-		ArrayList<Search.Item> segmentList = new ArrayList<Search.Item>();
-		String selectQuery = "SELECT * FROM " + TABLE_SEGMENTS;
-		Savelog.d(TAG, debug, selectQuery);
+    
+    
+    public ArrayList<Search.Item> getAllSegments() {
+        ArrayList<Search.Item> segmentList = new ArrayList<Search.Item>();
+        String selectQuery = "SELECT * FROM " + TABLE_SEGMENTS;
+        Savelog.d(TAG, debug, selectQuery);
 
-		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor c = db.rawQuery(selectQuery, null);
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
 
-		// looping through all rows and adding to list
-		if (c.moveToFirst()) {
-			do {
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
                 int moduleNumber = c.getInt((c.getColumnIndex(KEY_MODULENUMBER)));
-				int pageNumber = c.getInt((c.getColumnIndex(KEY_PAGENUMBER)));
-				String segment = c.getString(c.getColumnIndex(KEY_SEGMENT));
+                int pageNumber = c.getInt((c.getColumnIndex(KEY_PAGENUMBER)));
+                String segment = c.getString(c.getColumnIndex(KEY_SEGMENT));
 
-				// adding to list
-				segmentList.add(new Search.Item(moduleNumber, pageNumber, segment));
-			} while (c.moveToNext());
-		}
-		c.close();
-		db.close();
-		return segmentList;
-	}
+                // adding to list
+                segmentList.add(new Search.Item(moduleNumber, pageNumber, segment));
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return segmentList;
+    }
 
 
     public ArrayList<Search.Item> getSegmentMatching(int moduleNumber, String pattern) {
@@ -346,68 +346,68 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public ArrayList<Search.Item> getSegmentMatching(String pattern) {
-		ArrayList<Search.Item> resultList = new ArrayList<Search.Item>();
-		if (pattern==null || pattern.trim().length()==0) return resultList;
+        ArrayList<Search.Item> resultList = new ArrayList<Search.Item>();
+        if (pattern==null || pattern.trim().length()==0) return resultList;
 
-		String selectQuery = "SELECT " + KEY_MODULENUMBER + ", " + KEY_PAGENUMBER + ", " + KEY_SEGMENT
-				+ " FROM " + TABLE_SEGMENTS + " WHERE " + KEY_SEGMENT + " LIKE '%" + pattern + "%' "
+        String selectQuery = "SELECT " + KEY_MODULENUMBER + ", " + KEY_PAGENUMBER + ", " + KEY_SEGMENT
+                + " FROM " + TABLE_SEGMENTS + " WHERE " + KEY_SEGMENT + " LIKE '%" + pattern + "%' "
                 + " ORDER BY " + KEY_MODULENUMBER + ", " + KEY_PAGENUMBER;
 
 
-		Savelog.d(TAG, debug, "Calling rawQuery with " + selectQuery);
-		
-		SQLiteDatabase db = this.getReadableDatabase();
+        Savelog.d(TAG, debug, "Calling rawQuery with " + selectQuery);
+        
+        SQLiteDatabase db = this.getReadableDatabase();
 
-		Cursor c = db.rawQuery(selectQuery, null);
-		Savelog.d(TAG, debug, "query completed");
-		
-		// looping through all rows and adding to list
-		if (c.moveToFirst()) {
-			do {
+        Cursor c = db.rawQuery(selectQuery, null);
+        Savelog.d(TAG, debug, "query completed");
+        
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
                 int moduleNumber = c.getInt((c.getColumnIndex(KEY_MODULENUMBER)));
                 int pageNumber = c.getInt((c.getColumnIndex(KEY_PAGENUMBER)));
                 String segment = c.getString(c.getColumnIndex(KEY_SEGMENT));
 
-				// add to list
-				CharSequence segmentMatch = showAllMatches(segment, pattern);
-				if (segmentMatch==null) segmentMatch = segment;
+                // add to list
+                CharSequence segmentMatch = showAllMatches(segment, pattern);
+                if (segmentMatch==null) segmentMatch = segment;
 
 
-				resultList.add(new Search.Item(moduleNumber, pageNumber, segmentMatch));
-			} while (c.moveToNext());
-		}
-		c.close();
-		db.close();
-		return resultList;
-	}
-	
+                resultList.add(new Search.Item(moduleNumber, pageNumber, segmentMatch));
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return resultList;
+    }
+    
 
-	
-	private static CharSequence showAllMatches(String data, String pattern) {
-		ArrayList<Integer> indices = new ArrayList<Integer>();
-		
-		String dataLowercase = data.toLowerCase(Locale.getDefault());
-		String patternLowercase = pattern.toLowerCase(Locale.getDefault());
-		
-		int index = dataLowercase.indexOf(patternLowercase);
-		while (index>=0) {
-			indices.add(index);
-			index = dataLowercase.indexOf(patternLowercase, index+patternLowercase.length());
-		}
-		
-		if (indices.size()==0) return null;
-		
-		SpannableStringBuilder ssb = new SpannableStringBuilder(data);
-		CharacterStyle cs;
+    
+    private static CharSequence showAllMatches(String data, String pattern) {
+        ArrayList<Integer> indices = new ArrayList<Integer>();
+        
+        String dataLowercase = data.toLowerCase(Locale.getDefault());
+        String patternLowercase = pattern.toLowerCase(Locale.getDefault());
+        
+        int index = dataLowercase.indexOf(patternLowercase);
+        while (index>=0) {
+            indices.add(index);
+            index = dataLowercase.indexOf(patternLowercase, index+patternLowercase.length());
+        }
+        
+        if (indices.size()==0) return null;
+        
+        SpannableStringBuilder ssb = new SpannableStringBuilder(data);
+        CharacterStyle cs;
  
-		for (int i=0; i<indices.size(); i++) {
-			int start = indices.get(i);
-			int end = start + pattern.length();
-			cs = new BackgroundColorSpan(color_highlight);  // highlight text
-			ssb.setSpan(cs, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-		}
-		return ssb;
-	}
+        for (int i=0; i<indices.size(); i++) {
+            int start = indices.get(i);
+            int end = start + pattern.length();
+            cs = new BackgroundColorSpan(color_highlight);  // highlight text
+            ssb.setSpan(cs, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        }
+        return ssb;
+    }
 
 
 

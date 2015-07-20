@@ -46,19 +46,19 @@ import java.util.List;
 
 
 public class HomeworkApi extends Api {
-	private static final String TAG = HomeworkApi.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
+    private static final String TAG = HomeworkApi.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
 
     // The following fields are used for registration
     private static final String fieldTag = "tag";
-	private static final String fieldAccessCode = "accessCode";
+    private static final String fieldAccessCode = "accessCode";
     private static final String fieldCourseId = "courseId";
     private static final String fieldSemester = "semester";
     private static final String fieldSiteId = "siteId"; // private code to make sure this app matches with the site
     private static final String fieldModule = "module";
     private static final String fieldFile = "filename";
-	private static final int numberOfFields = 7;
-	private static final String defaultFilename = "hw.dat";
+    private static final int numberOfFields = 7;
+    private static final String defaultFilename = "hw.dat";
     private static final String tag_post = "submit";
     private static final String tag_get = "download";
 
@@ -71,20 +71,20 @@ public class HomeworkApi extends Api {
 
 
     // This requires network access. Therefore, it must be run within an asyncTask
-	public HomeworkApi(Context context, String accessCode, int moduleNumber, File uploadFile, String fileType) throws Exception {
-		super(context, defaultFilename);
-		Savelog.d(TAG, debug, "constructor called");
+    public HomeworkApi(Context context, String accessCode, int moduleNumber, File uploadFile, String fileType) throws Exception {
+        super(context, defaultFilename);
+        Savelog.d(TAG, debug, "constructor called");
 
-		// do the final bit of checking to prevent sending bad data to server
+        // do the final bit of checking to prevent sending bad data to server
         if (context==null) throw new Exception("invalid parameter");
         if (!Validity.isValid(accessCode)) throw new Exception("invalid parameter");
 
         int numberOfModules = Course.get(context).getNumberOfModules();
-		if (moduleNumber<1 || moduleNumber>numberOfModules) throw new Exception("invalid parameters");
+        if (moduleNumber<1 || moduleNumber>numberOfModules) throw new Exception("invalid parameters");
 
         if (uploadFile==null || !uploadFile.exists()) throw new Exception("Bad file cannot be uploaded.");
 
-		getFields(accessCode, moduleNumber, uploadFile, fileType);
+        getFields(accessCode, moduleNumber, uploadFile, fileType);
         post(context);
         data = IO.loadFileAsString(context, getSavedFile(context));
     }
@@ -185,35 +185,35 @@ public class HomeworkApi extends Api {
 
 
     private void getFields(String accessCode, int moduleNumber, File uploadFile, String fileType) {
-		if (accessCode!=null) this.accessCode = accessCode;
+        if (accessCode!=null) this.accessCode = accessCode;
         this.moduleNumber = moduleNumber;
         if (uploadFile!=null && uploadFile.exists()) this.uploadFile = uploadFile;
         if (fileType!=null && fileType.length()!=0) this.fileType = fileType;
-	}
+    }
 
-	@Override
-	protected List<NameValuePair> setPostData() {
+    @Override
+    protected List<NameValuePair> setPostData() {
         // This is only used by the post method in the parent class. We have redefined post here.
         // So we do not need to use this method. Return null.
-		return null;
-	}
-	
-	
+        return null;
+    }
+    
+    
 
-	@Override
-	public String getCommunication() {
-		return super.getCommunication() + "\nData:\n" + data;
-	}
+    @Override
+    public String getCommunication() {
+        return super.getCommunication() + "\nData:\n" + data;
+    }
 
 
-	public String getData() { return data; }
+    public String getData() { return data; }
 
 
     // For posting homework
-	@Override
-	protected String getSite(Context context) {
-		return PrivateSite.get(context).getHomeworkApi();
-	}
+    @Override
+    protected String getSite(Context context) {
+        return PrivateSite.get(context).getHomeworkApi();
+    }
 
 
     // For getting homework

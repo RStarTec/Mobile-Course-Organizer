@@ -42,8 +42,8 @@ import java.lang.ref.WeakReference;
 
 
 public class LoginFragment extends Fragment {
-	private static final String TAG = LoginFragment.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
+    private static final String TAG = LoginFragment.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
 
     public static final String EXTRA_Type = LoginFragment.class.getSimpleName()+".Type";
 
@@ -87,20 +87,20 @@ public class LoginFragment extends Fragment {
 
     private LoginAsyncTask mLoginAsyncTask = null;
 
-	public static LoginFragment newInstance(int type) {
-		Bundle args = new Bundle();
+    public static LoginFragment newInstance(int type) {
+        Bundle args = new Bundle();
 
-   		LoginFragment fragment = new LoginFragment();
+           LoginFragment fragment = new LoginFragment();
         args.putInt(EXTRA_Type, type);
-		fragment.setArguments(args);
-		return fragment;
-	}
-	
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		Savelog.d(TAG, debug, "onCreate()");
+        fragment.setArguments(args);
+        return fragment;
+    }
+    
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Savelog.d(TAG, debug, "onCreate()");
 
         mType = getArguments().getInt(EXTRA_Type, Type_default);
         mStudent = new Student(getActivity());
@@ -115,7 +115,7 @@ public class LoginFragment extends Fragment {
 
         setRetainInstance(true);
 
-	} // end to implementing onCreate()
+    } // end to implementing onCreate()
 
 
 

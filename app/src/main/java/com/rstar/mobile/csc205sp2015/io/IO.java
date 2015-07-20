@@ -159,19 +159,19 @@ public class IO {
     }
 
 
-	/* Attention: Do not use the following code for reading strings because char may have different
-	 * sizes on different machines.
-	public static String getRawResourceAsString(Context context, int resourceId) throws IOException {
-		InputStream in = context.getResources().openRawResource(resourceId);
-		InputStreamReader isr = new InputStreamReader(in);
-		char inputBuffer[] = new char[in.available()];
-		isr.read(inputBuffer);
-		String data = new String(inputBuffer);
-		isr.close();
-		in.close();
-		return data;
-	}
-	 */
+    /* Attention: Do not use the following code for reading strings because char may have different
+     * sizes on different machines.
+    public static String getRawResourceAsString(Context context, int resourceId) throws IOException {
+        InputStream in = context.getResources().openRawResource(resourceId);
+        InputStreamReader isr = new InputStreamReader(in);
+        char inputBuffer[] = new char[in.available()];
+        isr.read(inputBuffer);
+        String data = new String(inputBuffer);
+        isr.close();
+        in.close();
+        return data;
+    }
+    */
 
     private static String readStreamAsString(InputStream is) throws IOException {
         //create a buffer that has the same size as the InputStream

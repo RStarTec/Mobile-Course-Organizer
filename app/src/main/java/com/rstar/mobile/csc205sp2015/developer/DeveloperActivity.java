@@ -25,7 +25,7 @@ import com.rstar.mobile.csc205sp2015.R;
 import com.rstar.mobile.csc205sp2015.io.Savelog;
 
 public class DeveloperActivity extends Activity {
-	public static final String TAG = DeveloperActivity.class.getSimpleName()+"_class";
+    public static final String TAG = DeveloperActivity.class.getSimpleName()+"_class";
 
     public static final String EXTRA_Type = DeveloperActivity.class.getSimpleName()+".Type";
 
@@ -37,20 +37,20 @@ public class DeveloperActivity extends Activity {
     private int type = Type_default;
     private Fragment fragment;
     private int fragmentId;
-	//OnCreate Method:
-	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_developer);
+    //OnCreate Method:
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_developer);
         fragmentId = R.id.activityDeveloper_container;
 
         type = getIntent().getIntExtra(EXTRA_Type, Type_default);
 
         // Check if fragment already exists
-		FragmentManager fm = getFragmentManager();
-		fragment = fm.findFragmentById(fragmentId);
-		if (fragment == null) {
+        FragmentManager fm = getFragmentManager();
+        fragment = fm.findFragmentById(fragmentId);
+        if (fragment == null) {
             if (type==Type_post) {
                 fragment = PostFragment.newInstance();
             }
@@ -61,9 +61,9 @@ public class DeveloperActivity extends Activity {
                 fragment = MasterPostFragment.newInstance();
             }
 
-			fm.beginTransaction().add(fragmentId, fragment).commit();
-		}
-	}
+            fm.beginTransaction().add(fragmentId, fragment).commit();
+        }
+    }
 
     public void refreshMasterFragment(int newMasterType) {
         if (type==Type_master) {

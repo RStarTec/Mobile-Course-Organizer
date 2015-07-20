@@ -45,8 +45,8 @@ import java.lang.ref.WeakReference;
 
 
 public class MasterFragment extends Fragment {
-	private static final String TAG = MasterFragment.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
+    private static final String TAG = MasterFragment.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
 
     public static final String EXTRA_Type = MasterFragment.class.getSimpleName()+".Type";
 
@@ -102,30 +102,30 @@ public class MasterFragment extends Fragment {
 
     private LoginAsyncTask mLoginAsyncTask = null;
 
-	public static MasterFragment newInstance(int type) {
-		Bundle args = new Bundle();
+    public static MasterFragment newInstance(int type) {
+        Bundle args = new Bundle();
 
-   		MasterFragment fragment = new MasterFragment();
+           MasterFragment fragment = new MasterFragment();
         args.putInt(EXTRA_Type, type);
-		fragment.setArguments(args);
-		return fragment;
-	}
-	
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		Savelog.d(TAG, debug, "onCreate()");
+        fragment.setArguments(args);
+        return fragment;
+    }
+    
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Savelog.d(TAG, debug, "onCreate()");
 
         mType = getArguments().getInt(EXTRA_Type, Type_default);
 
         if (debug) {
             mEmail = DeveloperSettings.developerEmail;
         }
-		setRetainInstance(true);
+        setRetainInstance(true);
         setHasOptionsMenu(true);
 
-	} // end to implementing onCreate()
+    } // end to implementing onCreate()
 
 
 

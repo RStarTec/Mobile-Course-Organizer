@@ -33,8 +33,8 @@ import com.rstar.mobile.csc205sp2015.registered.homework.HomeworkBlankFragment;
 import com.rstar.mobile.csc205sp2015.registered.homework.HomeworkFragment;
 
 public abstract class DrawerActivity extends Activity {
-	private static final String TAG = DrawerActivity.class.getSimpleName()+"_class";
-	private static final boolean debug = true;
+    private static final String TAG = DrawerActivity.class.getSimpleName()+"_class";
+    private static final boolean debug = true;
 
     private static final double leftFraction = 2/3.0; // The left drawer should be 2/3 the width of screen
     private static final double rightFraction = 1/3.0; // The right drawer should be 1/3 the width of screen
@@ -46,7 +46,7 @@ public abstract class DrawerActivity extends Activity {
     private int rightDrawerWidth = 0;
     private int leftDrawerWidth = 0;
 
-	private DrawerLayout mDrawerLayout = null;
+    private DrawerLayout mDrawerLayout = null;
 
     Handler handlerTimer = new Handler();
 
@@ -75,16 +75,16 @@ public abstract class DrawerActivity extends Activity {
 
 
 
-	
-	@Override
-	public void onDestroy() {
+    
+    @Override
+    public void onDestroy() {
 
-		if (mDrawerLayout!=null) {
-			mDrawerLayout.setDrawerListener(null);
-			mDrawerLayout = null;
-		}
-		super.onDestroy();
-	}
+        if (mDrawerLayout!=null) {
+            mDrawerLayout.setDrawerListener(null);
+            mDrawerLayout = null;
+        }
+        super.onDestroy();
+    }
 
 
 

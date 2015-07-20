@@ -40,10 +40,10 @@ import com.rstar.mobile.csc205sp2015.registered.login.LoginActivity;
 import com.rstar.mobile.csc205sp2015.registered.login.UnlockActivity;
 
 public class HomeworkBlankFragment extends Fragment {
-	private static final String TAG = HomeworkBlankFragment.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
-	
-	private static final String EXTRA_ModuleNumber = HomeworkBlankFragment.class.getSimpleName()+".ModuleNumber";
+    private static final String TAG = HomeworkBlankFragment.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
+    
+    private static final String EXTRA_ModuleNumber = HomeworkBlankFragment.class.getSimpleName()+".ModuleNumber";
     private static final String EXTRA_Status = HomeworkBlankFragment.class.getSimpleName()+".Status";
 
     public static final int DownloadHomeworkRequestCode = HomeworkBlankFragment.class.hashCode();  // must be unique
@@ -65,37 +65,37 @@ public class HomeworkBlankFragment extends Fragment {
     private TextView mTextView = null;
     private ImageButton mButton = null;
 
-	// Supply the module number as an argument to the newly created hostFragment.
-	public static HomeworkBlankFragment newInstance(int moduleNumber) {
-		Bundle args = new Bundle();
-		args.putInt(EXTRA_ModuleNumber, moduleNumber);
+    // Supply the module number as an argument to the newly created hostFragment.
+    public static HomeworkBlankFragment newInstance(int moduleNumber) {
+        Bundle args = new Bundle();
+        args.putInt(EXTRA_ModuleNumber, moduleNumber);
 
-		HomeworkBlankFragment fragment = new HomeworkBlankFragment();
-		fragment.setArguments(args);
-		return fragment;
-	}
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);		
-		Savelog.d(TAG, debug, "onCreate() entered");
+        HomeworkBlankFragment fragment = new HomeworkBlankFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);        
+        Savelog.d(TAG, debug, "onCreate() entered");
 
-		mModuleNumber = getArguments().getInt(EXTRA_ModuleNumber, Module.DefaultModuleNumber);
+        mModuleNumber = getArguments().getInt(EXTRA_ModuleNumber, Module.DefaultModuleNumber);
         mStatus = Homework.Status.get(getActivity(), mModuleNumber);
 
         setRetainInstance(true);
 
-	} // end to implementing onCreate()
-	
-	
-	
-	
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-		View v;
-		Savelog.d(TAG, debug, "onCreateView() entered");
+    } // end to implementing onCreate()
+    
+    
+    
+    
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+        View v;
+        Savelog.d(TAG, debug, "onCreateView() entered");
 
-		v = inflater.inflate(R.layout.fragment_homework_blank, parent, false);
+        v = inflater.inflate(R.layout.fragment_homework_blank, parent, false);
 
         mTextView = (TextView) v.findViewById(R.id.fragmentHomeworkBlank_text_id);
         mButton = (ImageButton) v.findViewById(R.id.fragmentHomeworkBlank_button_id);
@@ -121,14 +121,14 @@ public class HomeworkBlankFragment extends Fragment {
             mButton.setVisibility(View.GONE);
         }
         return v;
-	} // end to implementing onCreateView() 
-	
-	
+    } // end to implementing onCreateView() 
+    
+    
 
 
-	public int getModuleNumber() {
-		return mModuleNumber;
-	}
+    public int getModuleNumber() {
+        return mModuleNumber;
+    }
 
 
     static private class ButtonOnClickListener implements View.OnClickListener {

@@ -35,8 +35,8 @@ import com.rstar.mobile.csc205sp2015.io.Savelog;
 
 
 public class NumToRepFragment extends Fragment {
-	private static final String TAG = NumToRepFragment.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
+    private static final String TAG = NumToRepFragment.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
 
     private static final int ButtonColorId = R.color.button_very_dark;
     private static final String Unfound = "?";
@@ -54,24 +54,24 @@ public class NumToRepFragment extends Fragment {
     private KeypadAdapter mBaseAdapter;
     private TextView mDisplayView;
 
-	public static NumToRepFragment newInstance() {
-		Bundle args = new Bundle();
+    public static NumToRepFragment newInstance() {
+        Bundle args = new Bundle();
 
-   		NumToRepFragment fragment = new NumToRepFragment();
-		fragment.setArguments(args);
-		return fragment;
-	}
-	
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		Savelog.d(TAG, debug, "onCreate()");
+           NumToRepFragment fragment = new NumToRepFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+    
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Savelog.d(TAG, debug, "onCreate()");
 
-		setRetainInstance(true);
+        setRetainInstance(true);
         setHasOptionsMenu(true);
 
-	} // end to implementing onCreate()
+    } // end to implementing onCreate()
 
 
 

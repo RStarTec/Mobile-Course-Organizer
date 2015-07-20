@@ -38,8 +38,8 @@ import com.rstar.mobile.csc205sp2015.io.Savelog;
 
 
 public class PipelineFragment extends Fragment {
-	private static final String TAG = PipelineFragment.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
+    private static final String TAG = PipelineFragment.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
 
     private static final String EXTRA_type = PipelineFragment.class.getSimpleName()+".type";
 

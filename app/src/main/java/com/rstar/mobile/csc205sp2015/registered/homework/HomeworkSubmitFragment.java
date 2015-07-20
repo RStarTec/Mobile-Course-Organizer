@@ -46,13 +46,13 @@ import com.rstar.mobile.csc205sp2015.registered.login.UnlockActivity;
 import java.lang.ref.WeakReference;
 
 public class HomeworkSubmitFragment extends Fragment {
-	private static final String TAG = HomeworkSubmitFragment.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
-	
-	private static final String EXTRA_ModuleNumber = HomeworkSubmitFragment.class.getSimpleName()+".ModuleNumber";
+    private static final String TAG = HomeworkSubmitFragment.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
+    
+    private static final String EXTRA_ModuleNumber = HomeworkSubmitFragment.class.getSimpleName()+".ModuleNumber";
 
     
-	private int mModuleNumber;
+    private int mModuleNumber;
     private int mNumberOfQuestions;
 
 
@@ -64,22 +64,22 @@ public class HomeworkSubmitFragment extends Fragment {
     private TextView mTextView = null;
     private Button mButton = null;
 
-	// Supply the module number as an argument to the newly created hostFragment.
-	public static HomeworkSubmitFragment newInstance(int moduleNumber) {
-		Bundle args = new Bundle();
-		args.putInt(EXTRA_ModuleNumber, moduleNumber);
+    // Supply the module number as an argument to the newly created hostFragment.
+    public static HomeworkSubmitFragment newInstance(int moduleNumber) {
+        Bundle args = new Bundle();
+        args.putInt(EXTRA_ModuleNumber, moduleNumber);
 
-		HomeworkSubmitFragment fragment = new HomeworkSubmitFragment();
-		fragment.setArguments(args);
-		return fragment;
-	}
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);		
-		Savelog.d(TAG, debug, "onCreate() entered");
+        HomeworkSubmitFragment fragment = new HomeworkSubmitFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);        
+        Savelog.d(TAG, debug, "onCreate() entered");
 
-		mModuleNumber = getArguments().getInt(EXTRA_ModuleNumber, Module.DefaultModuleNumber);
+        mModuleNumber = getArguments().getInt(EXTRA_ModuleNumber, Module.DefaultModuleNumber);
 
         mStudent = new Student(getActivity());
         
@@ -91,17 +91,17 @@ public class HomeworkSubmitFragment extends Fragment {
 
         setRetainInstance(true);
 
-	} // end to implementing onCreate()
-	
-	
-	
-	
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-		View v;
-		Savelog.d(TAG, debug, "onCreateView() entered");
+    } // end to implementing onCreate()
+    
+    
+    
+    
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+        View v;
+        Savelog.d(TAG, debug, "onCreateView() entered");
 
-		v = inflater.inflate(R.layout.fragment_homework_submit, parent, false);
+        v = inflater.inflate(R.layout.fragment_homework_submit, parent, false);
 
         mTextView = (TextView) v.findViewById(R.id.fragmentHomeworkSubmit_text_id);
         mButton = (Button) v.findViewById(R.id.fragmentHomeworkSubmit_button_id);
@@ -118,19 +118,19 @@ public class HomeworkSubmitFragment extends Fragment {
 
         }
         return v;
-	} // end to implementing onCreateView() 
-	
-	
+    } // end to implementing onCreateView() 
+    
+    
 
 
 
 
-	
-	public int getmoduleNumber() {
-		return mModuleNumber;
-	}
+    
+    public int getmoduleNumber() {
+        return mModuleNumber;
+    }
 
-	
+    
 
 
 

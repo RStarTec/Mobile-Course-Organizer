@@ -30,10 +30,10 @@ import com.rstar.mobile.csc205sp2015.io.Savelog;
 import com.rstar.mobile.csc205sp2015.module.Module;
 
 public class DownloadActivity extends Activity {
-	private static final String TAG = DownloadActivity.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
+    private static final String TAG = DownloadActivity.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
 
-	public static final String EXTRA_Trim = DownloadActivity.class.getSimpleName()+".trim";
+    public static final String EXTRA_Trim = DownloadActivity.class.getSimpleName()+".trim";
     public static final String EXTRA_ModuleNumber = DownloadActivity.class.getSimpleName()+".ModuleNumber";
     public static final String EXTRA_PageNumber = DownloadActivity.class.getSimpleName()+".PageNumber";
     public static final String EXTRA_Type = DownloadActivity.class.getSimpleName()+".Type";
@@ -46,23 +46,23 @@ public class DownloadActivity extends Activity {
     public static final int Type_courseReload = 7;
     public static final int Type_default = Type_module;
 
-	private TextView statusView;
+    private TextView statusView;
 
     private Fragment fragment;
-	private int fragmentId;
+    private int fragmentId;
 
     private int mType = Type_default;
     private boolean mTrim;
     private int mModuleNumber;
     private int mPageNumber;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		Savelog.d(TAG, debug, "OnCreate()");
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Savelog.d(TAG, debug, "OnCreate()");
 
         mType = getIntent().getIntExtra(EXTRA_Type, Type_default);
-		mTrim = getIntent().getBooleanExtra(EXTRA_Trim, AppSettings.Trim);
+        mTrim = getIntent().getBooleanExtra(EXTRA_Trim, AppSettings.Trim);
         mModuleNumber = getIntent().getIntExtra(EXTRA_ModuleNumber, Module.DefaultModuleNumber);
         mPageNumber = getIntent().getIntExtra(EXTRA_PageNumber, Module.DefaultPageNumber);
 
@@ -70,28 +70,28 @@ public class DownloadActivity extends Activity {
         setContentView(R.layout.activity_download);
         fragmentId = R.id.activityDownload_container;
 
-		statusView = (TextView) findViewById(R.id.download_status);
-		
-		FragmentManager fm = getFragmentManager();
+        statusView = (TextView) findViewById(R.id.download_status);
+        
+        FragmentManager fm = getFragmentManager();
 
-		fragment = fm.findFragmentById(fragmentId);
-		if (fragment==null) {
+        fragment = fm.findFragmentById(fragmentId);
+        if (fragment==null) {
             fragment = DownloadFragment.newInstance(mType, mTrim, mModuleNumber, mPageNumber);
             if (fragment!=null) {
                 fm.beginTransaction().add(fragmentId, fragment).commit();
             }
-		}
+        }
         else {
             // If fragment already exists, then get the progress
             postProgress(((DownloadFragment) fragment).getProcess());
         }
-	}
+    }
 
 
-	public void postProgress(String status) {
-		if (statusView!=null)
-			statusView.setText(status);
-	}
+    public void postProgress(String status) {
+        if (statusView!=null)
+            statusView.setText(status);
+    }
 
 
     public void setReturnIntent(boolean success) {

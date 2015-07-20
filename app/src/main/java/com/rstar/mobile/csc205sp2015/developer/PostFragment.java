@@ -47,10 +47,10 @@ import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
 
 public class PostFragment extends Fragment  {
-	private static final String TAG = PostFragment.class.getSimpleName()+"_class";
-	private static boolean debug = AppSettings.defaultDebug;
+    private static final String TAG = PostFragment.class.getSimpleName()+"_class";
+    private static boolean debug = AppSettings.defaultDebug;
 
-	private static final String type_signup = "signup";
+    private static final String type_signup = "signup";
     private static final String type_signin = "signin";
     private static final String type_reset = "reset";
     private static final String type_passwd = "passwd";
@@ -60,38 +60,38 @@ public class PostFragment extends Fragment  {
     private static final String type_feedback = "feedback";
     private static final String type_submitted = "submitted";
 
-	
-	private PostAsyncTask mPostAsyncTask;
-	private TextView statusView;
-	private String data = "";
+    
+    private PostAsyncTask mPostAsyncTask;
+    private TextView statusView;
+    private String data = "";
 
-	// Supply the hymn number as an argument to the newly created fragment.
-	public static PostFragment newInstance() {
-		Bundle args = new Bundle();
-		PostFragment fragment = new PostFragment();
-		fragment.setArguments(args);
-		return fragment;
-	}
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);		
+    // Supply the hymn number as an argument to the newly created fragment.
+    public static PostFragment newInstance() {
+        Bundle args = new Bundle();
+        PostFragment fragment = new PostFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);        
 
-		setRetainInstance(true);
-		setHasOptionsMenu(true);
+        setRetainInstance(true);
+        setHasOptionsMenu(true);
 
-	} // end to implementing onCreate()
-	
-	
-	
+    } // end to implementing onCreate()
+    
+    
+    
 
-	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-		View v;
-		
-		v = inflater.inflate(R.layout.fragment_post, parent, false);
-		statusView = (TextView) v.findViewById(R.id.fragmentPost_status);
-		return v;
-	} // end to implementing onCreateView() 
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+        View v;
+        
+        v = inflater.inflate(R.layout.fragment_post, parent, false);
+        statusView = (TextView) v.findViewById(R.id.fragmentPost_status);
+        return v;
+    } // end to implementing onCreateView() 
 
 
     @Override
@@ -105,24 +105,24 @@ public class PostFragment extends Fragment  {
 
 
     @Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		super.onCreateOptionsMenu(menu, inflater);
-		inflater.inflate(R.menu.post, menu);
-	}
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.post, menu);
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.menu_post_signup:
-			{
-				try {
-					mPostAsyncTask = new PostAsyncTask(this, type_signup);
-					mPostAsyncTask.execute();
-				} catch (Exception e) {
-					Savelog.e(TAG, "Cannot create post\n", e);
-				}
-				return true;
-			}
+            {
+                try {
+                    mPostAsyncTask = new PostAsyncTask(this, type_signup);
+                    mPostAsyncTask.execute();
+                } catch (Exception e) {
+                    Savelog.e(TAG, "Cannot create post\n", e);
+                }
+                return true;
+            }
             case R.id.menu_post_signin:
             {
                 try {
@@ -204,37 +204,37 @@ public class PostFragment extends Fragment  {
                 }
                 return true;
             }
-			case R.id.menu_post_export:
-			{
-				exportFile(data);
-				return true;
-			}
-			default:
-				return super.onOptionsItemSelected(item);
-		}
-	}
+            case R.id.menu_post_export:
+            {
+                exportFile(data);
+                return true;
+            }
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
-	
+    
 
-	private static class PostAsyncTask extends AsyncTask<Object, Void, Boolean> {
-		private Context appContext;
-		private final WeakReference<PostFragment> hostFragmentReference;
-		Exception err = null;
+    private static class PostAsyncTask extends AsyncTask<Object, Void, Boolean> {
+        private Context appContext;
+        private final WeakReference<PostFragment> hostFragmentReference;
+        Exception err = null;
         Api api = null;
-		String type;
-		String postData;
+        String type;
+        String postData;
 
-		public PostAsyncTask(PostFragment hostFragment, String type)  {
-			super();
-			this.appContext = hostFragment.getActivity().getApplicationContext();
-			hostFragmentReference = new WeakReference<PostFragment>(hostFragment);
-			this.type = type;
-		}
+        public PostAsyncTask(PostFragment hostFragment, String type)  {
+            super();
+            this.appContext = hostFragment.getActivity().getApplicationContext();
+            hostFragmentReference = new WeakReference<PostFragment>(hostFragment);
+            this.type = type;
+        }
 
-		@Override
-		protected Boolean doInBackground(Object... args) {
-			boolean forced = true;
-			try {
+        @Override
+        protected Boolean doInBackground(Object... args) {
+            boolean forced = true;
+            try {
                 if (type.equals(type_signup)) {
                     // Put some valid testers here
                     String userId = "nova1";
@@ -243,7 +243,7 @@ public class PostFragment extends Fragment  {
 
                     postData = LoginApi.class.getSimpleName() + ":\n";
                     api = new LoginApi(appContext, userId, password, null, email, LoginApi.request_signup);
-				}
+                }
                 else if (type.equals(type_signin)) {
                     // Put some valid testers here
                     String userId = "nova1";
@@ -334,73 +334,73 @@ public class PostFragment extends Fragment  {
                     api = new ScoreApi(appContext, userId, password, accessCode, moduleNumber, ScoreApi.request_submitted);
                 }
 
-				postData += "\n\n";
-				return true;
-			}
-			catch (Exception e) {
-				err = e;
-				return false;
-			}
-		}
+                postData += "\n\n";
+                return true;
+            }
+            catch (Exception e) {
+                err = e;
+                return false;
+            }
+        }
 
-		@Override
-		protected void onPostExecute(Boolean result) {
-			super.onPostExecute(result);
-			if (hostFragmentReference != null) {
-				final PostFragment hostFragment = hostFragmentReference.get();
-				if (hostFragment != null) {
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+            if (hostFragmentReference != null) {
+                final PostFragment hostFragment = hostFragmentReference.get();
+                if (hostFragment != null) {
                     if (type==type_download) {
                         // DONE!! Only GET result.
                         hostFragment.statusView.setText(postData);
                         hostFragment.data = postData;
                     }
-					else if (api !=null) {
-						String data = api.getCommunication();
+                    else if (api !=null) {
+                        String data = api.getCommunication();
 
-						if (data!=null) {
-							// DONE!! Check POST result
-							hostFragment.statusView.setText(postData+data);
-							hostFragment.data = postData+data;
+                        if (data!=null) {
+                            // DONE!! Check POST result
+                            hostFragment.statusView.setText(postData+data);
+                            hostFragment.data = postData+data;
 
-						}
-					}
-					else {
-						hostFragment.statusView.setText(postData+"failed");
-						hostFragment.data = postData+"failed";
-						if (err!=null) {
-							if (err instanceof IO.NetworkUnavailableException) {
-								Toast.makeText(hostFragment.getActivity(), Message.toastNoNetwork, Toast.LENGTH_SHORT).show();
-							}
-							else {
-								Toast.makeText(hostFragment.getActivity(), Message.toastDataUnavailable, Toast.LENGTH_SHORT).show();
-							}
-							Savelog.e(TAG, "POST failed.\n", err);
-						}
-					}
-				}
-			}
-			Savelog.d(TAG, debug, "AsyncTask completed.");
-		}
-	}
+                        }
+                    }
+                    else {
+                        hostFragment.statusView.setText(postData+"failed");
+                        hostFragment.data = postData+"failed";
+                        if (err!=null) {
+                            if (err instanceof IO.NetworkUnavailableException) {
+                                Toast.makeText(hostFragment.getActivity(), Message.toastNoNetwork, Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Toast.makeText(hostFragment.getActivity(), Message.toastDataUnavailable, Toast.LENGTH_SHORT).show();
+                            }
+                            Savelog.e(TAG, "POST failed.\n", err);
+                        }
+                    }
+                }
+            }
+            Savelog.d(TAG, debug, "AsyncTask completed.");
+        }
+    }
 
-	public static void exportFile(String data) {
-		String filename = "postExport.txt";
-		File f;
-		FileOutputStream fout = null;
-		PrintWriter pw = null;
-		try {
-			f = new File(IO.getDefaultExternalPath(), filename);
-			fout = new FileOutputStream(f);
-			pw = new PrintWriter(fout);
-			pw.print(data);
-			pw.flush();
-			pw.close();
-			fout.close();
-		}
-		catch (Exception e) {
-			Savelog.w(TAG, "Cannot save file " + filename + " externally");
-			if (fout!=null) try { fout.close(); } catch (IOException e1) {}
-			if (pw!=null) pw.close();
-		}
-	}
+    public static void exportFile(String data) {
+        String filename = "postExport.txt";
+        File f;
+        FileOutputStream fout = null;
+        PrintWriter pw = null;
+        try {
+            f = new File(IO.getDefaultExternalPath(), filename);
+            fout = new FileOutputStream(f);
+            pw = new PrintWriter(fout);
+            pw.print(data);
+            pw.flush();
+            pw.close();
+            fout.close();
+        }
+        catch (Exception e) {
+            Savelog.w(TAG, "Cannot save file " + filename + " externally");
+            if (fout!=null) try { fout.close(); } catch (IOException e1) {}
+            if (pw!=null) pw.close();
+        }
+    }
 }

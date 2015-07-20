@@ -27,27 +27,27 @@ import com.rstar.mobile.csc205sp2015.io.Savelog;
 
 
 public class HelpActivity extends Activity {
-	private static final String TAG = HelpActivity.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
-	
-	private HelpFragment fragment;
+    private static final String TAG = HelpActivity.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
+    
+    private HelpFragment fragment;
     private int fragmentId;
 
-	//OnCreate Method:
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		Savelog.d(TAG, debug, "onCreate()");
+    //OnCreate Method:
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Savelog.d(TAG, debug, "onCreate()");
 
-		setContentView(R.layout.activity_help);
+        setContentView(R.layout.activity_help);
         fragmentId = R.id.activityHelp_container;
 
-		// Check if fragment already exists
-		FragmentManager fm = getFragmentManager();
-		fragment = (HelpFragment) fm.findFragmentById(fragmentId);
-		if (fragment == null) {
-			fragment = HelpFragment.newInstance();
-			fm.beginTransaction().add(fragmentId, fragment).commit();
-		}
-	}
+        // Check if fragment already exists
+        FragmentManager fm = getFragmentManager();
+        fragment = (HelpFragment) fm.findFragmentById(fragmentId);
+        if (fragment == null) {
+            fragment = HelpFragment.newInstance();
+            fm.beginTransaction().add(fragmentId, fragment).commit();
+        }
+    }
 }

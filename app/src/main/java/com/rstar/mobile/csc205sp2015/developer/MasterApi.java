@@ -34,12 +34,12 @@ import java.util.List;
 
 
 public class MasterApi extends Api {
-	private static final String TAG = MasterApi.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
+    private static final String TAG = MasterApi.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
 
     // The following fields are used for master
     private static final String fieldTag = "tag";
-	private static final String fieldUserId = "userId";
+    private static final String fieldUserId = "userId";
     private static final String fieldPassword = "password";
     private static final String fieldEmail = "email";
     private static final String fieldNewPassword = "newPassword";
@@ -47,7 +47,7 @@ public class MasterApi extends Api {
     private static final String fieldCourseId = "courseId";
     private static final String fieldSemester = "semester";
     private static final String fieldSiteId = "siteId"; // private code to make sure this app matches with the site
-	private static final int numberOfFields = 8;
+    private static final int numberOfFields = 8;
     private static final String defaultFilename = "master.dat";  //save data to this file
     private static final String tag_mastersignup = "mastersignup";
     private static final String tag_mastersignin = "mastersignin";
@@ -70,7 +70,7 @@ public class MasterApi extends Api {
     public static final String DefaultAccessCode = "";
     public static final double DefaultScore = 0;
 
-	private String userId = "";
+    private String userId = "";
     private String password = "";
     private String newPassword = "";
     private String email = "";
@@ -80,13 +80,13 @@ public class MasterApi extends Api {
 
 
     // This requires network access. Therefore, it must be run within an asyncTask
-	public MasterApi(Context context, String userId, String password, String newPassword, String email, int request) throws Exception {
-		super(context, defaultFilename);
-		Savelog.d(TAG, debug, "constructor called for master");
+    public MasterApi(Context context, String userId, String password, String newPassword, String email, int request) throws Exception {
+        super(context, defaultFilename);
+        Savelog.d(TAG, debug, "constructor called for master");
 
-		// do the final bit of checking to prevent sending bad data to server
-		if (context==null) throw new Exception("invalid parameters");
-		if (userId==null || userId.length()==0) throw new Exception("invalid parameters");
+        // do the final bit of checking to prevent sending bad data to server
+        if (context==null) throw new Exception("invalid parameters");
+        if (userId==null || userId.length()==0) throw new Exception("invalid parameters");
         if (request!=request_mastersignup && request!=request_mastersignin && request!=request_masterunset && request!=request_masterpasswd) throw new Exception("invalid parameters");
 
         if (request==request_mastersignup) {
@@ -97,15 +97,15 @@ public class MasterApi extends Api {
             if (newPassword==null || newPassword.length()==0) throw new Exception("invalid parameters");
         }
 
-		getFields(userId, password, newPassword, email, DefaultModuleNumber, request);
+        getFields(userId, password, newPassword, email, DefaultModuleNumber, request);
 
         // Make sure the master has the private link
         setupMasterPrivateLink(context);
 
-		post(context);
-		data = IO.loadFileAsString(context, getSavedFile(context));
+        post(context);
+        data = IO.loadFileAsString(context, getSavedFile(context));
         Savelog.d(TAG, debug, "Data:" + data);
-	}
+    }
 
 
     // This requires network access. Therefore, it must be run within an asyncTask
@@ -137,7 +137,7 @@ public class MasterApi extends Api {
     }
 
     private void getFields(String userId, String password, String newPassword, String email, int moduleNumber, int request) {
-		if (userId!=null) this.userId = userId;
+        if (userId!=null) this.userId = userId;
         if (password!=null) this.password = password;
         if (email!=null) this.email = email;
         if (newPassword!=null) this.newPassword = newPassword;
@@ -156,12 +156,12 @@ public class MasterApi extends Api {
             postTag = tag_masterfeedback;
         else if (request==request_mastersubmitted)
             postTag = tag_mastersubmitted;
-	}
+    }
 
-	@Override
-	protected List<NameValuePair> setPostData() {
-		Savelog.d(TAG, debug, "Creating nameValuePairs of max size " + numberOfFields);
-		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+    @Override
+    protected List<NameValuePair> setPostData() {
+        Savelog.d(TAG, debug, "Creating nameValuePairs of max size " + numberOfFields);
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair(fieldTag, postTag));
         nameValuePairs.add(new BasicNameValuePair(fieldCourseId, courseId));
         nameValuePairs.add(new BasicNameValuePair(fieldSemester, semester));
@@ -193,14 +193,14 @@ public class MasterApi extends Api {
             nameValuePairs.add(new BasicNameValuePair(fieldUserId, userId));
             nameValuePairs.add(new BasicNameValuePair(fieldModule, Integer.toString(moduleNumber)));
         }
-		return nameValuePairs;
-	}
-	
+        return nameValuePairs;
+    }
+    
 
-	@Override
-	public String getCommunication() {
-		return super.getCommunication() + "\nData:\n" + data;
-	}
+    @Override
+    public String getCommunication() {
+        return super.getCommunication() + "\nData:\n" + data;
+    }
 
 
     public String getAccessCode() {
@@ -231,12 +231,12 @@ public class MasterApi extends Api {
 
 
     public String getData() {
-		return data;
-	}
-	
-	@Override
-	protected String getSite(Context context) {
-		return PrivateSite.get(context).getMasterApi();
-	}
+        return data;
+    }
+    
+    @Override
+    protected String getSite(Context context) {
+        return PrivateSite.get(context).getMasterApi();
+    }
 
 }

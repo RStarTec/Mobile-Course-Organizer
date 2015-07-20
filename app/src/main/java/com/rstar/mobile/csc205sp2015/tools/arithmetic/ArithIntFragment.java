@@ -33,8 +33,8 @@ import com.rstar.mobile.csc205sp2015.io.Savelog;
 
 
 public class ArithIntFragment extends Fragment {
-	private static final String TAG = ArithIntFragment.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
+    private static final String TAG = ArithIntFragment.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
 
     private static final int GridHeight = 4;
     private static final int GridWidth = 12;
@@ -59,26 +59,26 @@ public class ArithIntFragment extends Fragment {
     private InputTextWatcher mInputTextWatcher1;
     private InputTextWatcher mInputTextWatcher2;
 
-	public static ArithIntFragment newInstance() {
-		Bundle args = new Bundle();
+    public static ArithIntFragment newInstance() {
+        Bundle args = new Bundle();
 
-   		ArithIntFragment fragment = new ArithIntFragment();
-		fragment.setArguments(args);
-		return fragment;
-	}
-	
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		Savelog.d(TAG, debug, "onCreate()");
+           ArithIntFragment fragment = new ArithIntFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+    
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Savelog.d(TAG, debug, "onCreate()");
 
         blank = getResources().getString(R.string.label_blank);
 
-		setRetainInstance(true);
+        setRetainInstance(true);
         setHasOptionsMenu(true);
 
-	} // end to implementing onCreate()
+    } // end to implementing onCreate()
 
 
 

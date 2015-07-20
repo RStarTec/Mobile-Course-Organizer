@@ -26,8 +26,8 @@ import java.io.File;
 
 
 public abstract class DeveloperOptionsTemplate {
-	private static final String TAG = DeveloperOptionsTemplate.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
+    private static final String TAG = DeveloperOptionsTemplate.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
 
     public static final int BinaryOptions_count = 4;
     public static final int MultipleChoiceOptions_count = 1;

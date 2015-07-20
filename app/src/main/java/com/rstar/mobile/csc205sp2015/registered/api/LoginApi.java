@@ -30,21 +30,21 @@ import java.util.List;
 
 
 public class LoginApi extends Api {
-	private static final String TAG = LoginApi.class.getSimpleName()+"_class";
-	private static final boolean debug = AppSettings.defaultDebug;
+    private static final String TAG = LoginApi.class.getSimpleName()+"_class";
+    private static final boolean debug = AppSettings.defaultDebug;
 
     // The following fields are used for login
     private static final String fieldTag = "tag";
-	private static final String fieldUserId = "userId";
-	private static final String fieldPassword = "password";
+    private static final String fieldUserId = "userId";
+    private static final String fieldPassword = "password";
     private static final String fieldEmail = "email";
     private static final String fieldNewPassword = "newPassword";
     private static final String fieldCourseId = "courseId";
     private static final String fieldSemester = "semester";
     private static final String fieldSiteId = "siteId"; // private code to make sure this app matches with the site
-	private static final int numberOfFields = 8;
+    private static final int numberOfFields = 8;
     private static final String defaultLoginFilename = "login.dat";  // save all data to this file
-	private static final String defaultAccessCodeFilename = "access.dat"; // might be used for a different purpose later
+    private static final String defaultAccessCodeFilename = "access.dat"; // might be used for a different purpose later
     private static final String tag_signup = "signup";
     private static final String tag_signin = "signin";
     private static final String tag_reset = "reset";
@@ -58,8 +58,8 @@ public class LoginApi extends Api {
     public static final int request_passwd = 1004;
     public static final int request_default = 0;
 
-	private String userId = "";
-	private String password = "";
+    private String userId = "";
+    private String password = "";
     private String email = "";
     private String newPassword = "";
     private String postTag = tag_default;
@@ -118,10 +118,10 @@ public class LoginApi extends Api {
             postTag = tag_passwd;
     }
 
-	@Override
-	protected List<NameValuePair> setPostData() {
-		Savelog.d(TAG, debug, "Creating nameValuePairs of max size " + numberOfFields);
-		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+    @Override
+    protected List<NameValuePair> setPostData() {
+        Savelog.d(TAG, debug, "Creating nameValuePairs of max size " + numberOfFields);
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair(fieldTag, postTag));
         nameValuePairs.add(new BasicNameValuePair(fieldCourseId, courseId));
         nameValuePairs.add(new BasicNameValuePair(fieldSemester, semester));
@@ -144,15 +144,15 @@ public class LoginApi extends Api {
             nameValuePairs.add(new BasicNameValuePair(fieldPassword, password));
             nameValuePairs.add(new BasicNameValuePair(fieldNewPassword, newPassword));
         }
-		return nameValuePairs;
-	}
+        return nameValuePairs;
+    }
 
 
 
-	@Override
-	public String getCommunication() {
-		return super.getCommunication() + "\nData:\n" + data;
-	}
+    @Override
+    public String getCommunication() {
+        return super.getCommunication() + "\nData:\n" + data;
+    }
 
 
     public String getAccessCode() {
@@ -162,9 +162,9 @@ public class LoginApi extends Api {
         return DefaultAccessCode;
     }
 
-	@Override
-	protected String getSite(Context context) {
-		return PrivateSite.get(context).getLoginApi();
-	}
+    @Override
+    protected String getSite(Context context) {
+        return PrivateSite.get(context).getLoginApi();
+    }
 
 }
